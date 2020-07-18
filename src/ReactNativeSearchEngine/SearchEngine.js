@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, ScrollView } from 'react-native';
 import Styles from './StyleSearchEngine';
+import PropTypes from 'prop-types';
 
 import {
   filterIfObject,
@@ -14,8 +15,8 @@ const SearchEngine = props => {
   const {
     searchKey,
     data = [],
-    customizeResult,
-    customizeInput,
+    customizComponenteResult,
+    customizeComponentInput,
     containerScrollStyle,
     textInputStyle,
     containerInputStyle,
@@ -25,7 +26,6 @@ const SearchEngine = props => {
   const isArrayObject = typeof data[0] === 'object';
   const [search, setSearch] = useState('');
   const [value, setValue] = useState('');
-  console.log({ isArrayObject, data });
   const filterElements = isArrayObject
     ? filterIfObject({ search, searchKey, data })
     : filterIfArray({ search, data });
@@ -36,7 +36,7 @@ const SearchEngine = props => {
         setValue,
         setSearch,
         filterElements,
-        customizeResult,
+        customizComponenteResult,
         textInfoStyle,
         containerTextInfoStyle,
       })
@@ -44,7 +44,7 @@ const SearchEngine = props => {
         setValue,
         setSearch,
         filterElements,
-        customizeResult,
+        customizComponenteResult,
         textInfoStyle,
         containerTextInfoStyle,
       });
@@ -52,7 +52,7 @@ const SearchEngine = props => {
   return (
     <View>
       <ShowInput
-        customizeInput={customizeInput}
+        customizeComponentInput={customizeComponentInput}
         propertiesInput={propertiesInput}
         textInputStyle={textInputStyle}
         containerInputStyle={containerInputStyle}
@@ -67,3 +67,14 @@ const SearchEngine = props => {
 };
 
 export default SearchEngine;
+SearchEngine.propTypes = {
+  searchKey: PropTypes.string,
+  textInfoStyle: PropTypes.object,
+  textInputStyle: PropTypes.object,
+  containerInputStyle: PropTypes.object,
+  containerScrollStyle: PropTypes.object,
+  containerTextInfoStyle: PropTypes.object,
+  customizeComponentInput: PropTypes.func,
+  customizComponenteResult: PropTypes.func,
+  data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+};

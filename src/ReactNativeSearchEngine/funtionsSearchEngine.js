@@ -5,14 +5,14 @@ import Styles from './StyleSearchEngine';
 
 const ShowInfo = elements => {
   const {
-    customizeResult,
+    customizComponenteResult,
     properties,
     textInfoStyle,
     containerTextInfoStyle,
   } = elements;
-  const isCustomize = typeof customizeResult === 'function';
+  const isCustomize = typeof customizComponenteResult === 'function';
   return isCustomize ? (
-    customizeResult(properties)
+    customizComponenteResult(properties)
   ) : (
     <View style={containerTextInfoStyle || Styles.containerTextInfo}>
       <Text style={textInfoStyle || Styles.textInfo}>
@@ -23,15 +23,15 @@ const ShowInfo = elements => {
 };
 export const ShowInput = elements => {
   const {
-    customizeInput,
+    customizeComponentInput,
     propertiesInput,
     textInputStyle,
     containerInputStyle,
   } = elements;
   const { search, setSearch } = propertiesInput;
-  const isCustomize = typeof customizeInput === 'function';
+  const isCustomize = typeof customizeComponentInput === 'function';
   return isCustomize ? (
-    customizeInput(propertiesInput)
+    customizeComponentInput(propertiesInput)
   ) : (
     <View>
       <TextInput
@@ -72,7 +72,7 @@ export const renderElementsIfObjet = elements => {
     setValue,
     setSearch,
     filterElements,
-    customizeResult,
+    customizComponenteResult,
     textInfoStyle,
     containerTextInfoStyle,
   } = elements;
@@ -89,7 +89,7 @@ export const renderElementsIfObjet = elements => {
         }}
       >
         <ShowInfo
-          customizeResult={customizeResult}
+          customizComponenteResult={customizComponenteResult}
           properties={properties}
           textInfoStyle={textInfoStyle}
           containerTextInfoStyle={containerTextInfoStyle}
@@ -104,7 +104,7 @@ export const renderElementsIfArray = elements => {
     setValue,
     setSearch,
     filterElements,
-    customizeResult,
+    customizComponenteResult,
     textInfoStyle,
     containerTextInfoStyle,
   } = elements;
@@ -120,7 +120,7 @@ export const renderElementsIfArray = elements => {
         }}
       >
         <ShowInfo
-          customizeResult={customizeResult}
+          customizComponenteResult={customizComponenteResult}
           properties={properties}
           textInfoStyle={textInfoStyle}
           containerTextInfoStyle={containerTextInfoStyle}

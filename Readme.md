@@ -1,107 +1,73 @@
 
 # React Native Search Engie
 
+<p align="center">
+    <img src="https://i.ibb.co/Bc8C8St/Whats-App-Image-2020-07-18-at-11-00-19-AM.jpg" width="200" alt="accessibility text">
+    <img src="https://i.ibb.co/n87tTD6/Whats-App-Image-2020-07-18-at-10-52-20-AM.jpg" width="200" alt="accessibility text">
+    <img src="https://i.ibb.co/XY8NYHQ/Whats-App-Image-2020-07-18-at-10-58-51-AM.jpg" width="200" alt="accessibility text">
+</p>
 
-![alt text](https://www.bing.com/images/blob?bcid=Tmf0wHd.xpEBmQ)
-# How is it used
+## Documentation
+
+### Progress Steps Component
+| Name                      | Description                              | Default     | Type    | Criterion |
+|---------------------------|------------------------------------------|-------------|---------|-----------|
+| searchKey                 | Width of the progress bar between steps  | " "         | String  |  Optional |
+| data                      | Type of border for the progress bar      | { }         | Object / Array  | Required  |
+| textInfoStyle             | Text information styles                  | { }         | Object  | Optional  |
+| textInputStyle            | Input text styles                        | { }         | Object  | Optional  |
+| containerInputStyle       | Styles of input text containing          | { }         | Object  | Optional  |
+| containerScrollStyle      | Color of the active step icon            | { }         | Object  | Optional  |
+| containerTextInfoStyle    | Styles of information text containing    | { }         | Object  | Optional  |
+| customizeComponentInput   | Color of the disabled step icon          | ({ search, setSearch }) => < CustomizeComponentInput/> | Function  | Optional  |
+| customizComponenteResult  | Font family for the step icon label      | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
+
+
+## How Implement
+### Simpler way
+```    
+    <SearchEngine data={arrayData} />
 ```
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Text, Card, CardItem, Input, Item } from 'native-base';
-
-import colors from '../../../utils/colors';
-import SearchEngine from 'react-native-search-engine';
-
-const data = [
-  {
-    name: 'Johan Navarro',
-    ciudad: 'Manizales',
-    properties: {
-      telefonos: [523, 543],
-    },
-  },
-  {
-    name: 'Andres',
-    ciudad: 'Medellín',
-    properties: {
-      telefonos: [223, 543],
-    },
-  },
-  {
-    name: 'Kevin',
-    ciudad: 'Caldas',
-    properties: {
-      telefonos: [123, 543],
-    },
-  },
-  {
-    name: 'Jorge',
-    ciudad: 'Cali',
-    properties: {
-      phones: [423, 543],
-    },
-  },
-];
-const dataArray = ['Manizales', 'Medellín', 'Caldas', 'Cali'];
-const dataArrayInt = [2, 1.3, 1, 4];
-
-const customizeResult = properties => {
-  const { valueResult, element } = properties;
-  console.log('element>>>', element);
-  return (
-    <Card style={styles.containerCard}>
-      <CardItem style={styles.containerCardResult}>
-        <Text>{valueResult}</Text>
-      </CardItem>
-    </Card>
-  );
-};
-const customizeInput = properties => {
-  const { search, setSearch } = properties;
-  return (
-    <Item rounded style={styles.containerInput}>
-      <Input
-        style={styles.input}
-        value={search}
-        placeholder="First Phones"
-        autoCorrect={false}
-        onChangeText={value => setSearch(value)}
-        autoCapitalize="words"
-        autoCompleteType="off"
-      />
-    </Item>
-  );
-};
-
-const ExampleSearchAutoComplet = () => {
-  return (
-    <SearchEngine
-      searchKey={'properties.phones[0]'} //place the element path if it is an array of objects
-      data={data} // dataArray || dataArrayInt
-      customizeResult={properties => customizeResult(properties)}
-      customizeInput={properties => customizeInput(properties)}
+### Complexer way
+``` 
+   <SearchEngine
+      data={dataObject}
+      searchKey={'properties.emails.0'}
+      textInfoStyle={styles.textInfoStyle}
+      textInputStyle={styles.textInputStyle}
+      containerInputStyle={styles.containerInputStyle}
+      containerScrollStyle={styles.containerScrollStyle}
+      containerTextInfoStyle={styles.containerTextInfoStyle}
     />
-  );
-};
-
-export default ExampleSearchAutoComplet;
-
-const styles = StyleSheet.create({
-  input: {
-    marginLeft: 12,
-  },
-  containerInput: {
-    borderWidth: 2,
-    borderColor: colors.bordersInput,
-    borderRadius: 10,
-    marginVertical: 8,
-  },
-  containerCard: {
-    borderRadius: 10,
-  },
-  containerCardResult: {
-    borderRadius: 10,
-  },
-});
-
 ```
+### Custom way
+``` 
+   <SearchEngine
+      data={dataObject}
+      searchKey={'properties.emails.0'}
+      containerScrollStyle={styles.containerScrollStyle}
+      customizeComponentInput={properties => customizeInput(properties)}
+      customizComponenteResult={properties => customizeResult(properties)}
+    />
+```
+
+
+## Example
+[EXAMPLE CODE](./Example.md)
+
+## Donation
+
+<p align="left">
+ <a href="paypal.me/jsnavarroc">
+    <img src="https://i.ibb.co/Zh7hwfF/paypal-icon.png" width="60" alt="accessibility text">
+    <p align="left">click on the image</p>
+ </a>
+</p>
+
+## Author
+Johan Navarro  | [https://johannavarro.com](https://d9tfdj43jyndf.cloudfront.net/)
+
+Copyright (c)
+
+## License
+[MIT](./LICENSE)
