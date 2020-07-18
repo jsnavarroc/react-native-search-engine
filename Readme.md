@@ -56,18 +56,17 @@
 [EXAMPLE CODE](./Example.md)
 
 ## Donation
-
-<p align="left">
- <a href="paypal.me/jsnavarroc">
-    <img src="https://i.ibb.co/Zh7hwfF/paypal-icon.png" width="60" alt="accessibility text">
-    <p align="left">click on the image</p>
+<div align="center">
+ <a href="https://paypal.me/jsnavarroc">
+    <img src="https://i.ibb.co/Zh7hwfF/paypal-icon.png" width="70" alt="accessibility text">
+    <br>
+    click on the image
  </a>
-</p>
+</div>
 
 ## Author
 Johan Navarro  | [https://johannavarro.com](https://d9tfdj43jyndf.cloudfront.net/)
 
-Copyright (c)
 
 ## License
-[GNU](./LICENSE)
+[GNU &copy;](./LICENSE) 
