@@ -6,6 +6,8 @@
     <img src="https://i.ibb.co/n87tTD6/Whats-App-Image-2020-07-18-at-10-52-20-AM.jpg" width="200" alt="accessibility text">
     <img src="https://i.ibb.co/XY8NYHQ/Whats-App-Image-2020-07-18-at-10-58-51-AM.jpg" width="200" alt="accessibility text">
 </p>
+ 
+------------ 
 
 ## Documentation
 
@@ -22,7 +24,7 @@
 | customizeComponentInput   | Color of the disabled step icon          | ({ search, setSearch }) => < CustomizeComponentInput/> | Function  | Optional  |
 | customizComponenteResult  | Font family for the step icon label      | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
 
-
+------------ 
 ## How Implement
 ### Simpler way
 ```    
@@ -50,23 +52,27 @@
       customizComponenteResult={properties => customizeResult(properties)}
     />
 ```
-
+------------ 
 
 ## Example
 [EXAMPLE CODE](./Example.md)
 
-## Donation
+------------ 
+
+
 <div align="center">
  <a href="https://paypal.me/jsnavarroc">
-    <img src="https://i.ibb.co/Zh7hwfF/paypal-icon.png" width="70" alt="accessibility text">
-    <br>
-    click on the image
+ <H2>Donation</H2>
+    <img src="https://fitsmallbusiness.com/wp-content/uploads/2018/01/Paypal-Working-Capital-Reviews-150x150.png" width="70" alt="accessibility text">
  </a>
 </div>
+
+------------ 
 
 ## Author
 Johan Navarro  | [https://johannavarro.com](https://d9tfdj43jyndf.cloudfront.net/)
 
+------------ 
 
 ## License
 [GNU &copy;](./LICENSE) 
