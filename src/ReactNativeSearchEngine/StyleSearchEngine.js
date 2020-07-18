@@ -1,11 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+export const height = Dimensions.get('window').height;
 
 const Styles = StyleSheet.create({
-  input: {
+  containerScroll: {
+    maxHeight: height / 2,
+    backgroundColor: '#fff',
+  },
+  textInput: {
     fontSize: 17,
     textAlign: 'left',
   },
-  text: {
+  textInfo: {
     fontSize: 17,
     textAlign: 'left',
   },
@@ -16,14 +21,14 @@ const Styles = StyleSheet.create({
     borderRadius: 10,
     padding: 12,
   },
-  containerText: {
+  containerTextInfo: {
     borderWidth: 2,
     borderColor: '#d3d3d3',
     backgroundColor: '#fff',
     borderRadius: 10,
     height: 50,
     padding: 12,
-    marginBottom: 2,
+    marginBottom: 1,
   },
 });
 

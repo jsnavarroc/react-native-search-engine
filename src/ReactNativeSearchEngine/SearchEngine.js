@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
+import Styles from './StyleSearchEngine';
 
 import {
   filterIfObject,
@@ -10,7 +11,17 @@ import {
 } from './funtionsSearchEngine';
 
 const SearchEngine = props => {
-  const { searchKey, data = [], customizeResult, customizeInput } = props;
+  const {
+    searchKey,
+    data = [],
+    customizeResult,
+    customizeInput,
+    containerScrollStyle,
+    textInputStyle,
+    containerInputStyle,
+    textInfoStyle,
+    containerTextInfoStyle,
+  } = props;
   const isArrayObject = typeof data[0] === 'object';
   const [search, setSearch] = useState('');
   const [value, setValue] = useState('');
@@ -26,21 +37,31 @@ const SearchEngine = props => {
         setSearch,
         filterElements,
         customizeResult,
+        textInfoStyle,
+        containerTextInfoStyle,
       })
     : renderElementsIfArray({
         setValue,
         setSearch,
         filterElements,
         customizeResult,
+        textInfoStyle,
+        containerTextInfoStyle,
       });
-
+  const isShow = search !== value && search !== '' && results.length > 0;
   return (
     <View>
       <ShowInput
         customizeInput={customizeInput}
         propertiesInput={propertiesInput}
+        textInputStyle={textInputStyle}
+        containerInputStyle={containerInputStyle}
       />
-      {search !== value && results}
+      {isShow && (
+        <ScrollView style={containerScrollStyle || Styles.containerScroll}>
+          {results}
+        </ScrollView>
+      )}
     </View>
   );
 };

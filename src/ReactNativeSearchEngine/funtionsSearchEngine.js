@@ -3,28 +3,47 @@ import { TouchableOpacity, Text, TextInput, View } from 'react-native';
 import { filter, isEmpty, get } from 'lodash';
 import Styles from './StyleSearchEngine';
 
-const ShowInfo = ({ customizeResult, properties }) => {
+const ShowInfo = elements => {
+  const {
+    customizeResult,
+    properties,
+    textInfoStyle,
+    containerTextInfoStyle,
+  } = elements;
   const isCustomize = typeof customizeResult === 'function';
   return isCustomize ? (
     customizeResult(properties)
   ) : (
-    <View style={Styles.containerText}>
-      <Text style={Styles.text}>{properties.valueResult}</Text>
+    <View style={containerTextInfoStyle || Styles.containerTextInfo}>
+      <Text style={textInfoStyle || Styles.textInfo}>
+        {properties.valueResult}
+      </Text>
     </View>
   );
 };
-export const ShowInput = ({ customizeInput, propertiesInput }) => {
+export const ShowInput = elements => {
+  const {
+    customizeInput,
+    propertiesInput,
+    textInputStyle,
+    containerInputStyle,
+  } = elements;
   const { search, setSearch } = propertiesInput;
   const isCustomize = typeof customizeInput === 'function';
   return isCustomize ? (
     customizeInput(propertiesInput)
   ) : (
-    <TextInput
-      style={[Styles.input, Styles.containerInput]}
-      onChangeText={text => setSearch(text)}
-      value={search}
-      placeholder="Seach"
-    />
+    <View>
+      <TextInput
+        style={[
+          textInputStyle || Styles.textInput,
+          containerInputStyle || Styles.containerInput,
+        ]}
+        onChangeText={text => setSearch(text)}
+        value={search}
+        placeholder="Seach"
+      />
+    </View>
   );
 };
 
@@ -54,6 +73,8 @@ export const renderElementsIfObjet = elements => {
     setSearch,
     filterElements,
     customizeResult,
+    textInfoStyle,
+    containerTextInfoStyle,
   } = elements;
 
   return filterElements.map((element, key) => {
@@ -67,14 +88,26 @@ export const renderElementsIfObjet = elements => {
           setSearch(valueResult);
         }}
       >
-        <ShowInfo customizeResult={customizeResult} properties={properties} />
+        <ShowInfo
+          customizeResult={customizeResult}
+          properties={properties}
+          textInfoStyle={textInfoStyle}
+          containerTextInfoStyle={containerTextInfoStyle}
+        />
       </TouchableOpacity>
     );
   });
 };
 
 export const renderElementsIfArray = elements => {
-  const { setValue, setSearch, filterElements, customizeResult } = elements;
+  const {
+    setValue,
+    setSearch,
+    filterElements,
+    customizeResult,
+    textInfoStyle,
+    containerTextInfoStyle,
+  } = elements;
   return filterElements.map((element, key) => {
     const valueResult = element.toString();
     const properties = { valueResult, element };
@@ -86,7 +119,12 @@ export const renderElementsIfArray = elements => {
           setSearch(valueResult);
         }}
       >
-        <ShowInfo customizeResult={customizeResult} properties={properties} />
+        <ShowInfo
+          customizeResult={customizeResult}
+          properties={properties}
+          textInfoStyle={textInfoStyle}
+          containerTextInfoStyle={containerTextInfoStyle}
+        />
       </TouchableOpacity>
     );
   });
