@@ -91,6 +91,7 @@
  </a>
 </div>
 
+ >> [Make a donation](https://paypal.me/jsnavarroc)
 ------------ 
 
 ## Author
