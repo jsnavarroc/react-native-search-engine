@@ -70,4 +70,4 @@ Johan Navarro  | [https://johannavarro.com](https://d9tfdj43jyndf.cloudfront.net
 Copyright (c)
 
 ## License
-[MIT](./LICENSE)
+[GNU](./LICENSE)

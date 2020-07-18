@@ -19,7 +19,7 @@
     "react-native-autocomplete-search-engine"
   ],
   "author": "Johan Navarro",
-  "license": "ISC",
+  "license": "GNU",
   "bugs": {
     "url": "https://github.com/jsnavarroc/react-native-search-engine/issues"
   },
