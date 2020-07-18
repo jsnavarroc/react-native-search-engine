@@ -19,10 +19,10 @@
 | textInfoStyle             | Text information styles                  | { }         | Object  | Optional  |
 | textInputStyle            | Input text styles                        | { }         | Object  | Optional  |
 | containerInputStyle       | Styles of input text containing          | { }         | Object  | Optional  |
-| containerScrollStyle      | Color of the active step icon            | { }         | Object  | Optional  |
+| containerScrollStyle      | Text tag container stylesl               | { }         | Object  | Optional  |
 | containerTextInfoStyle    | Styles of information text containing    | { }         | Object  | Optional  |
-| customizeComponentInput   | Color of the disabled step icon          | ({ search, setSearch }) => < CustomizeComponentInput/> | Function  | Optional  |
-| customizComponenteResult  | Font family for the step icon label      | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
+| customizeComponentInput   | Used to return an input component        | ({ search, setSearch }) => < CustomizeComponentInput/> | Function  | Optional  |
+| customizComponenteResult  | It is used to return an output component | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
 
 ------------ 
 ## How Implement
