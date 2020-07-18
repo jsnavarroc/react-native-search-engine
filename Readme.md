@@ -1,5 +1,6 @@
 
 # React Native Search Engie
+### It is a type of search engine like the "html5's browsers input", it can be used to auto-complete words or to search for elements within an array or object.
 
 <p align="center">
     <img src="https://i.ibb.co/Bc8C8St/Whats-App-Image-2020-07-18-at-11-00-19-AM.jpg" width="200" alt="accessibility text">
@@ -11,7 +12,7 @@
 
 ## Documentation
 
-### Progress Steps Component
+### React Native Search Engine  Component
 | Name                      | Description                              | Default     | Type    | Criterion |
 |---------------------------|------------------------------------------|-------------|---------|-----------|
 | searchKey                 | Width of the progress bar between steps  | " "         | String  |  Optional |
