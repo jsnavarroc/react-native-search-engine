@@ -49,23 +49,39 @@ export const ShowInput = elements => {
 
 export const filterIfObject = elements => {
   const { search, searchKey, data } = elements;
-  return filter(data, (element, key) => {
-    const value = get(element, searchKey).toString();
-    return (
-      !isEmpty(search) && value.toLowerCase().search(search.toLowerCase()) === 0
-    );
-  });
+  try {
+    return filter(data, (element, key) => {
+      const value = get(element, searchKey).toString();
+      const doesntFindSymbol = search.toString().search(/[.|^:]/g) === -1;
+      return (
+        !isEmpty(search) &&
+        doesntFindSymbol &&
+        value.toLowerCase().search(search.toLowerCase()) === 0
+      );
+    });
+  } catch (error) {
+    // Doesn't support this symbols "+,(,),*,?,\,["
+    return [];
+  }
 };
 export const filterIfArray = elements => {
   const { search, data } = elements;
-  return filter(data, (element, key) => {
-    return (
-      !isEmpty(search) &&
-      element.toString().toLowerCase().search(search.toLowerCase()) === 0
-    );
-  });
+  try {
+    return filter(data, (element, key) => {
+      const doesntFindSymbol = search.toString().search(/[.|^:]/g) === -1;
+      return (
+        !isEmpty(search) &&
+        doesntFindSymbol &&
+        element.toString().toLowerCase().search(search.toLowerCase()) === 0
+      );
+    });
+  } catch (error) {
+    // Doesn't support this symbols "+,(,),*,?,\,["
+    return [];
+  }
 };
 
+// .,|,^,:
 export const renderElementsIfObjet = elements => {
   const {
     searchKey,
@@ -108,6 +124,7 @@ export const renderElementsIfArray = elements => {
     textInfoStyle,
     containerTextInfoStyle,
   } = elements;
+
   return filterElements.map((element, key) => {
     const valueResult = element.toString();
     const properties = { valueResult, element };

@@ -25,6 +25,30 @@
 | customizComponenteResult  | It is used to return an output component | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
 
 ------------ 
+
+## Warning 
+### Strings beginning with the following characters will not be found:
+
+
+|      |               |    Characters
+|------|---------------|-------------------|
+| 1    |               | +                 |
+| 2    |               | :                 |
+| 3    |               | (                 |
+| 4    |               | *                 |
+| 5    |               | ?                 |
+| 6    |               | \                 |
+| 7    |               | [                 |
+| 8    |               | .                 |
+| 9    |               | ^                 |
+| 10   |               | \|                |
+| 11   |               | )                 |
+
+
+
+
+
+------------ 
 ## How Implement
 ### Simpler way
 ```    
