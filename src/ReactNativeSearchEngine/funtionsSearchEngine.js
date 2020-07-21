@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, TextInput, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { filter, isEmpty, get } from 'lodash';
 import Styles from './StyleSearchEngine';
 
@@ -23,26 +24,64 @@ const ShowInfo = elements => {
 };
 export const ShowInput = elements => {
   const {
-    customizeComponentInput,
+    containerButtonStyle,
     propertiesInput,
     textInputStyle,
     containerInputStyle,
+    containerIconStyle,
+    placeholder,
+    propertiesButton,
+    customizeComponentInput,
+    customIcon,
+    onChangeText,
+    buttonEnabled,
   } = elements;
   const { search, setSearch } = propertiesInput;
+  const { showAll, setShowAll } = propertiesButton;
   const isCustomize = typeof customizeComponentInput === 'function';
-  return isCustomize ? (
+  const isCustomizeIcon = typeof customIcon === 'function';
+  const Input = isCustomize ? (
     customizeComponentInput(propertiesInput)
   ) : (
-    <View>
-      <TextInput
-        style={[
-          textInputStyle || Styles.textInput,
-          containerInputStyle || Styles.containerInput,
-        ]}
-        onChangeText={text => setSearch(text)}
-        value={search}
-        placeholder="Seach"
-      />
+    <TextInput
+      style={[
+        textInputStyle || Styles.textInput,
+        containerInputStyle || Styles.containerInput,
+      ]}
+      onChangeText={text => {
+        setSearch(text);
+        setShowAll(false);
+        onChangeText(text);
+      }}
+      value={search}
+      placeholder={placeholder || 'Search'}
+    />
+  );
+
+  const IconCustomize = isCustomizeIcon ? (
+    customIcon()
+  ) : (
+    <Icon name="caret-down" size={15} color="#737373" />
+  );
+
+  const button = (
+    <TouchableOpacity
+      onPress={() => {
+        setShowAll(showAll ? false : true);
+      }}
+      style={containerButtonStyle || Styles.containerTouch}
+    >
+      <View>
+        <View style={containerIconStyle || Styles.containerIcon}>
+          {IconCustomize}
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      <View style={{ width: buttonEnabled ? '80%' : '100%' }}>{Input}</View>
+      {buttonEnabled ? button : <></>}
     </View>
   );
 };
@@ -64,6 +103,7 @@ export const filterIfObject = elements => {
     return [];
   }
 };
+
 export const filterIfArray = elements => {
   const { search, data } = elements;
   try {
@@ -87,10 +127,12 @@ export const renderElementsIfObjet = elements => {
     searchKey,
     setValue,
     setSearch,
+    setShowAll,
     filterElements,
     customizComponenteResult,
     textInfoStyle,
     containerTextInfoStyle,
+    onChangeText,
   } = elements;
 
   return filterElements.map((element, key) => {
@@ -102,6 +144,8 @@ export const renderElementsIfObjet = elements => {
         onPress={() => {
           setValue(valueResult);
           setSearch(valueResult);
+          setShowAll(false);
+          onChangeText(valueResult);
         }}
       >
         <ShowInfo
@@ -123,6 +167,8 @@ export const renderElementsIfArray = elements => {
     customizComponenteResult,
     textInfoStyle,
     containerTextInfoStyle,
+    setShowAll,
+    onChangeText,
   } = elements;
 
   return filterElements.map((element, key) => {
@@ -134,6 +180,8 @@ export const renderElementsIfArray = elements => {
         onPress={() => {
           setValue(valueResult);
           setSearch(valueResult);
+          onChangeText(valueResult);
+          setShowAll(false);
         }}
       >
         <ShowInfo

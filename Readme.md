@@ -1,5 +1,5 @@
 
-# React Native Search Engie
+# React Native Search Engine
 ### It is a type of search engine like the "html5's browsers input", it can be used to auto-complete words or to search for elements within an array or object.
 
 <p align="center">
@@ -18,12 +18,18 @@
 | searchKey                 | Width of the progress bar between steps  | " "         | String  |  Optional |
 | data                      | Type of border for the progress bar      | { }         | Object / Array  | Required  |
 | textInfoStyle             | Text information styles                  | { }         | Object  | Optional  |
+| buttonEnabled             | If you want show or not the button       | true        | Boolean | Optional  |
 | textInputStyle            | Input text styles                        | { }         | Object  | Optional  |
+| placeholder               | Help text                                | 'Search'    | String  | Optional  |
 | containerInputStyle       | Styles of input text containing          | { }         | Object  | Optional  |
 | containerScrollStyle      | Text tag container stylesl               | { }         | Object  | Optional  |
 | containerTextInfoStyle    | Styles of information text containing    | { }         | Object  | Optional  |
+| containerButtonStyle      | Options display styles                   | { }         | Object  | Optional  |
+| containerIconStyle        | Icon Styles                              | { }         | Object  | Optional  |
+| onChangeText              | Get the text                             | onChangeText={text => setOption(text)} | Function  | Required  |
 | customizeComponentInput   | Used to return an input component        | ({ search, setSearch }) => < CustomizeComponentInput/> | Function  | Optional  |
 | customizComponenteResult  | It is used to return an output component | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
+| customIcon                | This is used to customize the icon       | () => < CustomIcon/> | Function | Optional  |
 
 ------------ 
 
@@ -51,28 +57,105 @@
 
 ------------ 
 ## How Implement
+
+<img src="https://i.ibb.co/17sgZVJ/image.png" width="200" alt="accessibility text">
+
+
+
 ### Simpler way
-```    
-    <SearchEngine data={arrayData} />
+
+<p align="center">
+    <img src="https://i.ibb.co/tq5RRBc/Simpler-way0.jpg" width="200" alt="accessibility text">
+    <img src="https://i.ibb.co/b1dVm8V/Simpler-way1.jpg" width="200" alt="accessibility text">
+    <img src="https://i.ibb.co/DGYx0QY/Simpler-way-0-1.jpg" width="200" alt="accessibility text">
+    <img src="https://i.ibb.co/SVLR0jH/Simpler-way2.jpg" width="200" alt="accessibility text">
+</p>
+ 
+
+```JS  
+     <SearchEngine
+      data={data}
+      searchKey={'properties.emails.0'}
+      onChangeText={text => setOption(text)}
+      buttonEnabled={true}
+      placeholder={'email'}
+    />
 ```
 ### Complexer way
-``` 
-   <SearchEngine
-      data={dataObject}
+
+<p align="center">
+    <img src="https://i.ibb.co/c6G1VNJ/Complexer-way1.jpg" width="200" alt="accessibility text">
+</p>
+
+``` JS
+    import { Icon } from 'native-base';
+```
+
+```JS
+    <SearchEngine
+      data={data}
       searchKey={'properties.emails.0'}
-      textInfoStyle={styles.textInfoStyle}
-      textInputStyle={styles.textInputStyle}
+      onChangeText={text => setOption(text)}
+      buttonEnabled={true}
+      placeholder={'email'}
+      containerIconStyle={styles.containerIconStyle}
       containerInputStyle={styles.containerInputStyle}
       containerScrollStyle={styles.containerScrollStyle}
       containerTextInfoStyle={styles.containerTextInfoStyle}
+      containerButtonStyle={styles.containerButtonStyle}
+      customIcon={() => <Icon name="arrow-down" />}
     />
 ```
+
 ### Custom way
-``` 
-   <SearchEngine
-      data={dataObject}
+<p align="center">
+    <img src="https://i.ibb.co/0DGjm03/Custom-way.jpg" width="200" alt="accessibility text">
+</p>
+
+```JS
+    const customizeResult = properties => {
+        const { valueResult, element } = properties;
+        console.log('element>>>', element);
+        return (
+            <Card style={styles.containerCard}>
+            <CardItem style={styles.containerCardResult}>
+                <Text>{valueResult}</Text>
+            </CardItem>
+            </Card>
+        );
+    };
+    
+```
+
+```JS
+
+    const customizeInput = properties => {
+        const { search, setSearch } = properties;
+        return (
+            <Item rounded style={styles.containerInput}>
+                <Input
+                    style={styles.input}
+                    value={search}
+                    placeholder="email"
+                    autoCorrect={false}
+                    onChangeText={value => setSearch(value)}
+                    autoCapitalize="words"
+                    autoCompleteType="off"
+                />
+            </Item>
+        );
+    };
+
+```
+
+```Js
+
+    <SearchEngine
+      data={data}
       searchKey={'properties.emails.0'}
-      containerScrollStyle={styles.containerScrollStyle}
+      onChangeText={text => setOption(text)}
+      placeholder={'email'}
+      buttonEnabled={false}
       customizeComponentInput={properties => customizeInput(properties)}
       customizComponenteResult={properties => customizeResult(properties)}
     />
