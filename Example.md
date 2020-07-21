@@ -1,12 +1,9 @@
-# How is it used
-```
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, Card, CardItem, Input, Item } from 'native-base';
+import { Text, Card, CardItem, Input, Item, Icon } from 'native-base';
 
-import colors from '../../../utils/colors';
-import SearchEngine from 'react-native-search-engine';
-
+// import SearchEngine from 'react-native-search-engine';
+import SearchEngine from '../SearchEngine/SearchEngine';
 
 const data = [
   {
@@ -42,8 +39,23 @@ const data = [
     },
   },
 ];
-const dataArray = ['Manizales', 'Medellín', 'Caldas', 'Viena', 'Valencia'];
-const dataArrayInt = [2, 1.3, 1, 4];
+const dataArray = ['Manizales+', 'Medellín|', 'Bogotá', 'Viena', 'Valencia'];
+const dataArrayInt = [
+  0.1,
+  0.2,
+  0.3,
+  0.4,
+  1.0,
+  1.1,
+  1.2,
+  1.3,
+  1.4,
+  1.5,
+  1.6,
+  1.7,
+  1.8,
+  1.9,
+];
 
 const customizeResult = properties => {
   const { valueResult, element } = properties;
@@ -63,7 +75,7 @@ const customizeInput = properties => {
       <Input
         style={styles.input}
         value={search}
-        placeholder="Ciudad"
+        placeholder="email"
         autoCorrect={false}
         onChangeText={value => setSearch(value)}
         autoCapitalize="words"
@@ -74,17 +86,15 @@ const customizeInput = properties => {
 };
 
 const ExampleSearchAutoComplet = () => {
+  const [option, setOption] = useState();
+  console.log('option>>>', option);
   return (
     <SearchEngine
-      searchKey={'properties.emails.0'}
-      data={data}
-      textInfoStyle={styles.textInfoStyle}
-      textInputStyle={styles.textInputStyle}
-      containerInputStyle={styles.containerInputStyle}
-      containerScrollStyle={styles.containerScrollStyle}
-      containerTextInfoStyle={styles.containerTextInfoStyle}
-      customizeComponentInput={properties => customizeInput(properties)}
-      customizComponenteResult={properties => customizeResult(properties)}
+      data={dataArray}
+      searchKey={'name'}
+      onChangeElement={text => setOption(text)}
+      buttonEnabled={true}
+      placeholder={'email'}
     />
   );
 };
@@ -113,13 +123,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'left',
   },
-  containerInputStyle: {
-    borderWidth: 2,
-    backgroundColor: '#fff',
-    borderColor: 'red',
-    borderRadius: 10,
-    padding: 12,
-  },
   containerTextInfoStyle: {
     borderWidth: 2,
     backgroundColor: '#fff',
@@ -131,7 +134,36 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'left',
   },
+  containerInputStyle: {
+    borderLeftWidth: 2,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderRightWidth: 0,
+    borderTopColor: 'red',
+    borderBottomColor: 'red',
+    borderRightColor: 'rgba(255, 255, 255, 0)',
+    borderLeftColor: 'red',
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    padding: 12,
+  },
+  containerButtonStyle: {
+    borderLeftWidth: 0,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderRightWidth: 2,
+    borderTopColor: 'red',
+    borderBottomColor: 'red',
+    borderRightColor: 'red',
+    borderLeftColor: 'rgba(255, 255, 255,0)',
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    padding: 0,
+    textAlign: 'center',
+    alignItems: 'center',
+    width: '20%',
+  },
+  containerIconStyle: {
+    marginTop: 10,
+  },
 });
-
-
-```

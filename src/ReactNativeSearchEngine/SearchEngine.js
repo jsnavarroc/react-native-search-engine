@@ -26,7 +26,7 @@ const SearchEngine = props => {
     containerIconStyle,
     customIcon,
     placeholder,
-    onChangeText,
+    onChangeElement,
     buttonEnabled = true,
   } = props;
   const isArrayObject = typeof data[0] === 'object';
@@ -38,7 +38,7 @@ const SearchEngine = props => {
     : isArrayObject
     ? filterIfObject({ search, searchKey, data })
     : filterIfArray({ search, data });
-  const propertiesInput = { search, setSearch };
+  const propertiesInput = { search, setSearch, searchKey, isArrayObject, data };
   const propertiesButton = { showAll, setShowAll };
   const results = isArrayObject
     ? renderElementsIfObjet({
@@ -50,7 +50,7 @@ const SearchEngine = props => {
         textInfoStyle,
         containerTextInfoStyle,
         setShowAll,
-        onChangeText,
+        onChangeElement,
       })
     : renderElementsIfArray({
         setValue,
@@ -60,7 +60,7 @@ const SearchEngine = props => {
         textInfoStyle,
         containerTextInfoStyle,
         setShowAll,
-        onChangeText,
+        onChangeElement,
       });
   const isShow = search !== value && search !== '' && results.length > 0;
   return (
@@ -75,7 +75,7 @@ const SearchEngine = props => {
         containerButtonStyle={containerButtonStyle}
         customIcon={customIcon}
         containerIconStyle={containerIconStyle}
-        onChangeText={onChangeText}
+        onChangeElement={onChangeElement}
         setShowAll={setShowAll}
         buttonEnabled={buttonEnabled}
       />
@@ -101,7 +101,7 @@ SearchEngine.propTypes = {
   containerButtonStyle: PropTypes.object,
   containerIconStyle: PropTypes.object,
   customizeComponentInput: PropTypes.func,
-  onChangeText: PropTypes.func.isRequired,
+  onChangeElement: PropTypes.func,
   customizComponenteResult: PropTypes.func,
   customIcon: PropTypes.func,
   data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,

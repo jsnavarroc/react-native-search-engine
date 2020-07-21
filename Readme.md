@@ -16,7 +16,7 @@
 | Name                      | Description                              | Default     | Type    | Criterion |
 |---------------------------|------------------------------------------|-------------|---------|-----------|
 | searchKey                 | Width of the progress bar between steps  | " "         | String  |  Optional |
-| data                      | Type of border for the progress bar      | { }         | Object / Array  | Required  |
+| data                      | Type of border for the progress bar      | [ ]         | Array   | Required  |
 | textInfoStyle             | Text information styles                  | { }         | Object  | Optional  |
 | buttonEnabled             | If you want show or not the button       | true        | Boolean | Optional  |
 | textInputStyle            | Input text styles                        | { }         | Object  | Optional  |
@@ -26,7 +26,7 @@
 | containerTextInfoStyle    | Styles of information text containing    | { }         | Object  | Optional  |
 | containerButtonStyle      | Options display styles                   | { }         | Object  | Optional  |
 | containerIconStyle        | Icon Styles                              | { }         | Object  | Optional  |
-| onChangeText              | Get the text                             | onChangeText={text => setOption(text)} | Function  | Required  |
+| onChangeElement           | Get the text or object                   | onChangeText={object => setOption(object)} | Function  | Optional  |
 | customizeComponentInput   | Used to return an input component        | ({ search, setSearch }) => < CustomizeComponentInput/> | Function  | Optional  |
 | customizComponenteResult  | It is used to return an output component | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
 | customIcon                | This is used to customize the icon       | () => < CustomIcon/> | Function | Optional  |
@@ -76,7 +76,7 @@
      <SearchEngine
       data={data}
       searchKey={'properties.emails.0'}
-      onChangeText={text => setOption(text)}
+      onChangeElement={object => setOption(object)}
       buttonEnabled={true}
       placeholder={'email'}
     />
@@ -95,7 +95,7 @@
     <SearchEngine
       data={data}
       searchKey={'properties.emails.0'}
-      onChangeText={text => setOption(text)}
+      onChangeElement={object => setOption(object)}
       buttonEnabled={true}
       placeholder={'email'}
       containerIconStyle={styles.containerIconStyle}
@@ -153,7 +153,7 @@
     <SearchEngine
       data={data}
       searchKey={'properties.emails.0'}
-      onChangeText={text => setOption(text)}
+      onChangeElement={object => setOption(object)}
       placeholder={'email'}
       buttonEnabled={false}
       customizeComponentInput={properties => customizeInput(properties)}

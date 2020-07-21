@@ -22,6 +22,24 @@ const ShowInfo = elements => {
     </View>
   );
 };
+
+const onChangeExecute = elements => {
+  const { isArrayObject, text, searchKey, data, onChangeElement } = elements;
+  const elementObject = isArrayObject
+    ? filterIfObject({ search: text, searchKey, data })
+    : filterIfArray({ search: text, data });
+  if (elementObject.length === 1 && text.length > 0) {
+    onChangeElement(elementObject[0]);
+  }
+  if (text.length === 0 || elementObject.length > 1) {
+    if (isArrayObject) {
+      onChangeElement({ value: '' });
+    } else {
+      onChangeElement('');
+    }
+  }
+};
+
 export const ShowInput = elements => {
   const {
     containerButtonStyle,
@@ -33,25 +51,35 @@ export const ShowInput = elements => {
     propertiesButton,
     customizeComponentInput,
     customIcon,
-    onChangeText,
+    onChangeElement,
     buttonEnabled,
   } = elements;
-  const { search, setSearch } = propertiesInput;
+  const { search, setSearch, searchKey, data, isArrayObject } = propertiesInput;
   const { showAll, setShowAll } = propertiesButton;
   const isCustomize = typeof customizeComponentInput === 'function';
   const isCustomizeIcon = typeof customIcon === 'function';
+  const isOnChangeElement = typeof onChangeElement === 'function';
+
   const Input = isCustomize ? (
     customizeComponentInput(propertiesInput)
   ) : (
     <TextInput
       style={[
         textInputStyle || Styles.textInput,
-        containerInputStyle || Styles.containerInput,
+        containerInputStyle || Styles.containerInput({ buttonEnabled }),
       ]}
+      autoCompleteType={'off'}
       onChangeText={text => {
         setSearch(text);
         setShowAll(false);
-        onChangeText(text);
+        isOnChangeElement &&
+          onChangeExecute({
+            isArrayObject,
+            text,
+            searchKey,
+            data,
+            onChangeElement,
+          });
       }}
       value={search}
       placeholder={placeholder || 'Search'}
@@ -132,8 +160,9 @@ export const renderElementsIfObjet = elements => {
     customizComponenteResult,
     textInfoStyle,
     containerTextInfoStyle,
-    onChangeText,
+    onChangeElement,
   } = elements;
+  const isOnChangeElement = typeof onChangeElement === 'function';
 
   return filterElements.map((element, key) => {
     const valueResult = get(element, searchKey).toString();
@@ -145,7 +174,7 @@ export const renderElementsIfObjet = elements => {
           setValue(valueResult);
           setSearch(valueResult);
           setShowAll(false);
-          onChangeText(valueResult);
+          isOnChangeElement && onChangeElement(element);
         }}
       >
         <ShowInfo
@@ -168,9 +197,9 @@ export const renderElementsIfArray = elements => {
     textInfoStyle,
     containerTextInfoStyle,
     setShowAll,
-    onChangeText,
+    onChangeElement,
   } = elements;
-
+  const isOnChangeElement = typeof onChangeElement === 'function';
   return filterElements.map((element, key) => {
     const valueResult = element.toString();
     const properties = { valueResult, element };
@@ -180,8 +209,8 @@ export const renderElementsIfArray = elements => {
         onPress={() => {
           setValue(valueResult);
           setSearch(valueResult);
-          onChangeText(valueResult);
           setShowAll(false);
+          isOnChangeElement && onChangeElement(element);
         }}
       >
         <ShowInfo
