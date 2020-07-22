@@ -26,7 +26,7 @@
 | containerTextInfoStyle    | Styles of information text containing    | { }         | Object  | Optional  |
 | containerButtonStyle      | Options display styles                   | { }         | Object  | Optional  |
 | containerIconStyle        | Icon Styles                              | { }         | Object  | Optional  |
-| onChangeElement           | Get the text or object                   | onChangeText={object => setOption(object)} | Function  | Optional  |
+| onChangeElement           | Get the text or object                   | onChangeElement={object => setOption(object)} | Function  | Optional  |
 | customizeComponentInput   | Used to return an input component        | ({ search, setSearch }) => < CustomizeComponentInput/> | Function  | Optional  |
 | customizComponenteResult  | It is used to return an output component | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
 | customIcon                | This is used to customize the icon       | () => < CustomIcon/> | Function | Optional  |
