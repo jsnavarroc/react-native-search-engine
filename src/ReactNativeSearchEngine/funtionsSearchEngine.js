@@ -50,7 +50,7 @@ export const filterArray = elements => {
       );
     });
     
-    if (isEmpty(search) && dataFilder.length === 0) {
+    if (isEmpty(search) && dataFilder.length === 0 && showAllMode) {
       return data;
     }
 
