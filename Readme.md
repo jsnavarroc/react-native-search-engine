@@ -13,6 +13,7 @@
 ## Documentation
 
 ### React Native Search Engine  Component
+
 | Name                      | Description                              | Default     | Type    | Criterion |
 |---------------------------|------------------------------------------|-------------|---------|-----------|
 | searchKey                 | Width of the progress bar between steps  | " "         | String  |  Optional |
@@ -34,6 +35,9 @@
 | customIcon                | This is used to customize the icon       | () => < CustomIcon/> | Function | Optional  |
 
 ------------ 
+
+
+
 
 ## Warning 
 ### Strings beginning with the following characters will not be found:
