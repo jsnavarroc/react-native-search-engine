@@ -11,6 +11,7 @@ const SearchEngine = props => {
   const {
     searchKey,
     data = [],
+    style = {},
     customizComponenteResult,
     customizeComponentInput,
     containerScrollStyle,
@@ -48,7 +49,7 @@ const SearchEngine = props => {
 
   const isShow = search !== value && search !== '';
   return (
-    <View>
+    <View style={style}>
       <InputProcess
         propertiesInput={propertiesInput}
         propertiesButton={propertiesButton}
@@ -84,6 +85,7 @@ SearchEngine.propTypes = {
   buttonEnabled: PropTypes.bool,
   showAllMode: PropTypes.bool,
   showNothing: PropTypes.bool,
+  style: PropTypes.object,
   textInfoStyle: PropTypes.object,
   textInputStyle: PropTypes.object,
   containerInputStyle: PropTypes.object,
