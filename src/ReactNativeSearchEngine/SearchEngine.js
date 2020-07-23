@@ -24,16 +24,16 @@ const SearchEngine = props => {
     placeholder,
     onChangeElement,
     buttonEnabled = true,
-    isShowAll = false,
+    showAllMode = false,
     showNothing = false,
   } = props;
   const isArrayObject = typeof data[0] === 'object';
   const [search, setSearch] = useState('');
   const [value, setValue] = useState('');
-  const [showAll, setShowAll] = useState(isShowAll);
+  const [showAll, setShowAll] = useState(showAllMode);
   const filterElements = showAll
     ? data
-    : filterArray({ search, searchKey, data, isArrayObject });
+    : filterArray({ search, searchKey, data, isArrayObject, showAllMode });
 
   const propertiesInput = { search, setSearch, searchKey, isArrayObject, data };
   const propertiesButton = { showAll, setShowAll };
@@ -64,6 +64,7 @@ const SearchEngine = props => {
         onChangeElement={onChangeElement}
         setShowAll={setShowAll}
         buttonEnabled={buttonEnabled}
+        showAllMode={showAllMode}
       />
       {(isShow || showAll) && !showNothing && (
         <ScrollView style={containerScrollStyle || Styles.containerScroll}>
@@ -83,7 +84,8 @@ SearchEngine.propTypes = {
   searchKey: PropTypes.string,
   placeholder: PropTypes.string,
   buttonEnabled: PropTypes.bool,
-  isShowAll: PropTypes.bool,
+  showAllMode: PropTypes.bool,
+  showNothing: PropTypes.bool,
   textInfoStyle: PropTypes.object,
   textInputStyle: PropTypes.object,
   containerInputStyle: PropTypes.object,

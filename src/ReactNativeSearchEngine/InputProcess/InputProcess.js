@@ -18,6 +18,7 @@ const InputProcess = elements => {
     customIcon,
     onChangeElement,
     buttonEnabled,
+    showAllMode,
   } = elements;
   const { search, setSearch, searchKey, data, isArrayObject } = propertiesInput;
   const { showAll, setShowAll } = propertiesButton;
@@ -44,6 +45,7 @@ const InputProcess = elements => {
             searchKey,
             data,
             onChangeElement,
+            showAllMode,
           });
       }}
       value={search}

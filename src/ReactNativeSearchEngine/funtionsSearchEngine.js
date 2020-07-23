@@ -1,15 +1,26 @@
 import { filter, isEmpty, get } from 'lodash';
 
 export const onChangeExecute = elements => {
-  const { isArrayObject, text, searchKey, data, onChangeElement } = elements;
+  const {
+    isArrayObject,
+    text,
+    searchKey,
+    data,
+    onChangeElement,
+    showAllMode,
+  } = elements;
   // Find elements
   const elementObject = filterArray({
     search: text,
     searchKey,
     data,
     isArrayObject,
+    showAllMode,
   });
   if (elementObject.length > 0 && text.length > 0) {
+    onChangeElement({ data: elementObject, value: text });
+  }
+  if (elementObject.length > 0 && showAllMode) {
     onChangeElement({ data: elementObject, value: text });
   }
   if (elementObject.length === 0) {
@@ -22,9 +33,9 @@ export const onChangeExecute = elements => {
 };
 
 export const filterArray = elements => {
-  const { search, searchKey, data, isArrayObject } = elements;
+  const { search, searchKey, data, isArrayObject, showAllMode } = elements;
   try {
-    return filter(data, (element, key) => {
+    const dataFilder = filter(data, (element, key) => {
       let value = '';
       if (isArrayObject) {
         value = searchKey ? get(element, searchKey).toString() : '';
@@ -38,6 +49,10 @@ export const filterArray = elements => {
         value.toLowerCase().search(search.toLowerCase()) === 0
       );
     });
+    if (showAllMode && dataFilder.length === 0) {
+      return data;
+    }
+    return dataFilder;
   } catch (error) {
     // Doesn't support this symbols "+,(,),*,?,\,["
     return [];
