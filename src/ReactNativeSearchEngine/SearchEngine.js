@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ScrollView } from 'react-native';
 import Styles from './StyleSearchEngine';
 import PropTypes from 'prop-types';
@@ -30,11 +30,10 @@ const SearchEngine = props => {
     value = ''
   } = props;
   const isArrayObject = typeof data[0] === 'object';
-  const [search, setSearch] = useState();
-  const [valueData, setValueData] = useState(value);
+  const [search, setSearch] = useState(value);
+  const [valueData, setValueData] = useState();
   const [showAll, setShowAll] = useState(showAllMode);
   const filterElements = filterArray({ search, searchKey, data, isArrayObject, showAllMode, showAll });
-
   const propertiesInput = { search, setSearch, searchKey, isArrayObject, data };
   const propertiesButton = { showAll, setShowAll };
   const elements = {
@@ -49,6 +48,12 @@ const SearchEngine = props => {
   };
 
   const isShow = search !== valueData && search !== '';
+
+  useEffect(() => {
+    onChangeElement({data:filterElements, value})
+  },[])
+
+
   return (
     <View style={style}>
       <InputProcess

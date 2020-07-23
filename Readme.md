@@ -17,6 +17,7 @@
 | Name                      | Description                              | Default     | Type    | Criterion |
 |---------------------------|------------------------------------------|-------------|---------|-----------|
 | searchKey                 | Width of the progress bar between steps  | " "         | String  |  Optional |
+| value                     | If you want me to submit an initial search  | ""       | String  |  Optional |
 | data                      | Type of border for the progress bar      | [ ]         | Array   | Required  |
 | textInfoStyle             | Text information styles                  | { }         | Object  | Optional  |
 | buttonEnabled             | If you want show or not the button       | true        | Boolean | Optional  |

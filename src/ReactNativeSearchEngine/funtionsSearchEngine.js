@@ -33,7 +33,7 @@ export const onChangeExecute = elements => {
 };
 
 export const filterArray = elements => {
-  const { search, searchKey, data, isArrayObject, showAllMode, showAll } = elements;
+  const { search, searchKey, data, isArrayObject, showAllMode } = elements;
   try {
     const dataFilder = filter(data, (element, key) => {
       let value = '';
