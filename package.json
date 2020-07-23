@@ -1,6 +1,6 @@
 {
   "name": "react-native-search-engine",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "description": "It is a type of search engine like the \"html5's browsers input\", it can be used to auto-complete words or to search for elements within an array or object.",
   "main": "index.js",
   "scripts": {
