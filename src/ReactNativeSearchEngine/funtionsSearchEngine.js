@@ -49,6 +49,11 @@ export const filterArray = elements => {
         value.toLowerCase().search(search.toLowerCase()) === 0
       );
     });
+    
+    if (isEmpty(search) && dataFilder.length === 0) {
+      return data;
+    }
+
     if ((showAllMode) && dataFilder.length === 0) {
       return data;
     }
