@@ -27,17 +27,18 @@ const SearchEngine = props => {
     buttonEnabled = true,
     showAllMode = false,
     showNothing = false,
+    value = ''
   } = props;
   const isArrayObject = typeof data[0] === 'object';
-  const [search, setSearch] = useState('');
-  const [value, setValue] = useState('');
+  const [search, setSearch] = useState();
+  const [valueData, setValueData] = useState(value);
   const [showAll, setShowAll] = useState(showAllMode);
   const filterElements = filterArray({ search, searchKey, data, isArrayObject, showAllMode, showAll });
 
   const propertiesInput = { search, setSearch, searchKey, isArrayObject, data };
   const propertiesButton = { showAll, setShowAll };
   const elements = {
-    setValue,
+    setValueData,
     setSearch,
     filterElements,
     customizComponenteResult,
@@ -47,7 +48,7 @@ const SearchEngine = props => {
     onChangeElement,
   };
 
-  const isShow = search !== value && search !== '';
+  const isShow = search !== valueData && search !== '';
   return (
     <View style={style}>
       <InputProcess
@@ -81,6 +82,7 @@ const SearchEngine = props => {
 export default SearchEngine;
 SearchEngine.propTypes = {
   searchKey: PropTypes.string,
+  value: PropTypes.string,
   placeholder: PropTypes.string,
   buttonEnabled: PropTypes.bool,
   showAllMode: PropTypes.bool,

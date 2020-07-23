@@ -54,12 +54,6 @@ export const filterArray = elements => {
       return data;
     }
 
-    if ((showAllMode) && dataFilder.length === 0) {
-      return data;
-    }
-    if (showAll) { 
-      return data;
-    }
     return dataFilder;
   } catch (error) {
     // Doesn't support this symbols "+,(,),*,?,\,["

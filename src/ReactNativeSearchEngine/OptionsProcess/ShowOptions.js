@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import ShowInfoComponent from './ShowInfoComponent';
 const Options = props => {
   const {
-    setValue,
+    setValueData,
     setSearch,
     setShowAll,
     customizComponenteResult,
@@ -23,7 +23,7 @@ const Options = props => {
   return (
     <TouchableOpacity
       onPress={() => {
-        setValue(valueResult);
+        setValueData(valueResult);
         setSearch(valueResult);
         setShowAll(false);
         isOnChangeElement &&
