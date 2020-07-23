@@ -31,9 +31,7 @@ const SearchEngine = props => {
   const [search, setSearch] = useState('');
   const [value, setValue] = useState('');
   const [showAll, setShowAll] = useState(showAllMode);
-  const filterElements = showAll
-    ? data
-    : filterArray({ search, searchKey, data, isArrayObject, showAllMode });
+  const filterElements = filterArray({ search, searchKey, data, isArrayObject, showAllMode, showAll });
 
   const propertiesInput = { search, setSearch, searchKey, isArrayObject, data };
   const propertiesButton = { showAll, setShowAll };

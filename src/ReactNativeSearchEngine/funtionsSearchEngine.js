@@ -33,7 +33,7 @@ export const onChangeExecute = elements => {
 };
 
 export const filterArray = elements => {
-  const { search, searchKey, data, isArrayObject, showAllMode } = elements;
+  const { search, searchKey, data, isArrayObject, showAllMode, showAll } = elements;
   try {
     const dataFilder = filter(data, (element, key) => {
       let value = '';
@@ -49,7 +49,10 @@ export const filterArray = elements => {
         value.toLowerCase().search(search.toLowerCase()) === 0
       );
     });
-    if (showAllMode && dataFilder.length === 0) {
+    if ((showAllMode) && dataFilder.length === 0) {
+      return data;
+    }
+    if (showAll) { 
       return data;
     }
     return dataFilder;

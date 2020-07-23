@@ -37,7 +37,7 @@ const InputProcess = elements => {
       autoCompleteType={'off'}
       onChangeText={text => {
         setSearch(text);
-        setShowAll(false);
+        setShowAll(showAllMode && text===''?true:false);
         isOnChangeElement &&
           onChangeExecute({
             isArrayObject,
