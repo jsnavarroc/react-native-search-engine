@@ -54,15 +54,15 @@ const Styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 18,
   },
-  containerTextInfo: {
+  containerTextInfo: ({ isEmpetyText }) => ({
     borderWidth: 1,
     borderColor: '#d3d3d3',
-    backgroundColor: '#fff',
+    backgroundColor: isEmpetyText ? 'red' : '#fff',
     borderRadius: 10,
     height: 50,
     padding: 12,
     marginBottom: 1,
-  },
+  }),
 });
 
 export default Styles;

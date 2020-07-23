@@ -19,6 +19,8 @@
 | data                      | Type of border for the progress bar      | [ ]         | Array   | Required  |
 | textInfoStyle             | Text information styles                  | { }         | Object  | Optional  |
 | buttonEnabled             | If you want show or not the button       | true        | Boolean | Optional  |
+| isShowAll                 | Whether to show all options when loading component | false       | Boolean | Optional  |
+| showNothing               | Doesn't show the options, but the onChange Element gives me the filtered data | false       | Boolean | Optional  |
 | textInputStyle            | Input text styles                        | { }         | Object  | Optional  |
 | placeholder               | Help text                                | 'Search'    | String  | Optional  |
 | containerInputStyle       | Styles of input text containing          | { }         | Object  | Optional  |

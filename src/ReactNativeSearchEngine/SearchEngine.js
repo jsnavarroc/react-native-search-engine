@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 import { View, ScrollView } from 'react-native';
 import Styles from './StyleSearchEngine';
 import PropTypes from 'prop-types';
+import OptionProcess from './OptionsProcess/OptionProcess';
+import InputProcess from './InputProcess/InputProcess';
 
-import {
-  filterIfObject,
-  filterIfArray,
-  renderElementsIfArray,
-  renderElementsIfObjet,
-  ShowInput,
-} from './funtionsSearchEngine';
+import { filterArray } from './funtionsSearchEngine';
 
 const SearchEngine = props => {
   const {
@@ -28,44 +24,34 @@ const SearchEngine = props => {
     placeholder,
     onChangeElement,
     buttonEnabled = true,
+    isShowAll = false,
+    showNothing = false,
   } = props;
   const isArrayObject = typeof data[0] === 'object';
   const [search, setSearch] = useState('');
   const [value, setValue] = useState('');
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(isShowAll);
   const filterElements = showAll
     ? data
-    : isArrayObject
-    ? filterIfObject({ search, searchKey, data })
-    : filterIfArray({ search, data });
+    : filterArray({ search, searchKey, data, isArrayObject });
+
   const propertiesInput = { search, setSearch, searchKey, isArrayObject, data };
   const propertiesButton = { showAll, setShowAll };
-  const results = isArrayObject
-    ? renderElementsIfObjet({
-        searchKey,
-        setValue,
-        setSearch,
-        filterElements,
-        customizComponenteResult,
-        textInfoStyle,
-        containerTextInfoStyle,
-        setShowAll,
-        onChangeElement,
-      })
-    : renderElementsIfArray({
-        setValue,
-        setSearch,
-        filterElements,
-        customizComponenteResult,
-        textInfoStyle,
-        containerTextInfoStyle,
-        setShowAll,
-        onChangeElement,
-      });
-  const isShow = search !== value && search !== '' && results.length > 0;
+  const elements = {
+    setValue,
+    setSearch,
+    filterElements,
+    customizComponenteResult,
+    textInfoStyle,
+    containerTextInfoStyle,
+    setShowAll,
+    onChangeElement,
+  };
+
+  const isShow = search !== value && search !== '';
   return (
     <View>
-      <ShowInput
+      <InputProcess
         propertiesInput={propertiesInput}
         propertiesButton={propertiesButton}
         textInputStyle={textInputStyle}
@@ -79,9 +65,13 @@ const SearchEngine = props => {
         setShowAll={setShowAll}
         buttonEnabled={buttonEnabled}
       />
-      {(isShow || showAll) && (
+      {(isShow || showAll) && !showNothing && (
         <ScrollView style={containerScrollStyle || Styles.containerScroll}>
-          {results}
+          <OptionProcess
+            {...elements}
+            searchKey={searchKey}
+            isArrayObject={isArrayObject}
+          />
         </ScrollView>
       )}
     </View>
@@ -93,6 +83,7 @@ SearchEngine.propTypes = {
   searchKey: PropTypes.string,
   placeholder: PropTypes.string,
   buttonEnabled: PropTypes.bool,
+  isShowAll: PropTypes.bool,
   textInfoStyle: PropTypes.object,
   textInputStyle: PropTypes.object,
   containerInputStyle: PropTypes.object,

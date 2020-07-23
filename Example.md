@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, Card, CardItem, Input, Item, Icon } from 'native-base';
 
-// import SearchEngine from 'react-native-search-engine';
-import SearchEngine from '../SearchEngine/SearchEngine';
+import SearchEngine from 'react-native-search-engine';
+
 
 const data = [
   {
@@ -77,7 +77,7 @@ const customizeInput = properties => {
         value={search}
         placeholder="email"
         autoCorrect={false}
-        onChangeText={value => setSearch(value)}
+        onChangeElement={object => setSearch(object)}
         autoCapitalize="words"
         autoCompleteType="off"
       />
