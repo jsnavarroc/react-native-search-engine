@@ -16,9 +16,9 @@
 
 | Name                      | Description                              | Default     | Type    | Criterion |
 |---------------------------|------------------------------------------|-------------|---------|-----------|
-| searchKey                 | Width of the progress bar between steps  | " "         | String  |  Optional |
+| searchKey                 | If you are working with an array of objects and you want to search by a specific property that all objects have in common, can put something like 'user.name'  | ""         | String  |  Optional |
 | value                     | If you want me to submit an initial search  | ""       | String  |  Optional |
-| data                      | Type of border for the progress bar      | [ ]         | Array   | Required  |
+| data                      | The data to searching                    | [ ]         | Array   | Required  |
 | textInfoStyle             | Text information styles                  | { }         | Object  | Optional  |
 | buttonEnabled             | If you want show or not the button       | true        | Boolean | Optional  |
 | showAllMode               | If you want  to show all options when it can't find anything | false       | Boolean | Optional  |
