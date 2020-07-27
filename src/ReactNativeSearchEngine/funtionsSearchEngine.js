@@ -33,7 +33,7 @@ export const onChangeExecute = elements => {
 };
 
 export const filterArray = elements => {
-  const { search, searchKey, data, isArrayObject, showAllMode } = elements;
+  const { search, searchKey, data, isArrayObject, showAllMode, showAll } = elements;
   try {
     const dataFilder = filter(data, (element, key) => {
       let value = '';
@@ -50,7 +50,7 @@ export const filterArray = elements => {
       );
     });
     
-    if (isEmpty(search) && dataFilder.length === 0 && showAllMode) {
+    if ((isEmpty(search) && dataFilder.length === 0 && showAllMode) || showAll) {
       return data;
     }
 
