@@ -10,8 +10,8 @@ import { filterArray } from './funtionsSearchEngine';
 const SearchEngine = props => {
   const {
     searchKey,
-    data = [],
-    style = {},
+    data,
+    style,
     customizComponenteResult,
     customizeComponentInput,
     containerScrollStyle,
@@ -24,9 +24,9 @@ const SearchEngine = props => {
     customIcon,
     placeholder,
     onChangeElement,
-    buttonEnabled = true,
-    showAllMode = false,
-    showNothing = false,
+    buttonEnabled,
+    showAllMode,
+    showNothing,
     value = ''
   } = props;
   const isArrayObject = typeof data[0] === 'object';
@@ -46,7 +46,7 @@ const SearchEngine = props => {
     setShowAll,
     onChangeElement,
   };
-
+  const scrollStyles = { ...Styles.containerScroll, ...containerScrollStyle };
   const isShow = search !== valueData && search !== '';
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const SearchEngine = props => {
         showAllMode={showAllMode}
       />
       {(isShow || showAll) && !showNothing && (
-        <ScrollView style={containerScrollStyle || Styles.containerScroll}>
+        <ScrollView style={scrollStyles} nestedScrollEnabled = {true}>
           <OptionProcess
             {...elements}
             searchKey={searchKey}
@@ -85,6 +85,16 @@ const SearchEngine = props => {
 };
 
 export default SearchEngine;
+
+
+SearchEngine.defaultProps = {
+  containerScrollStyle: {},
+  buttonEnabled: true,
+  showAllMode: false,
+  showNothing: false,
+  data: [],
+  style: {}
+};
 SearchEngine.propTypes = {
   searchKey: PropTypes.string,
   value: PropTypes.string,
@@ -104,5 +114,5 @@ SearchEngine.propTypes = {
   onChangeElement: PropTypes.func,
   customizComponenteResult: PropTypes.func,
   customIcon: PropTypes.func,
-  data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };
