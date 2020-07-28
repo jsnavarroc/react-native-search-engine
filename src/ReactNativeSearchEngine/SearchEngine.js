@@ -53,6 +53,10 @@ const SearchEngine = props => {
     onChangeElement({data:filterElements, value})
   },[])
 
+  useEffect(() => { 
+    setSearch('')
+    setValueData('')
+  },[data])
 
   return (
     <View style={style}>
