@@ -2,56 +2,83 @@ import React from 'react';
 import { TouchableOpacity, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 /* utilities */
-import { onChangeExecute } from '../funtionsSearchEngine';
+import { onChangeExecute, onChangeCutomExecute } from '../funtionsSearchEngine';
 import Styles from '../StyleSearchEngine';
+
+const InputText = ({ propertiesInput }) => {
+  const {
+    search,
+    setSearch,
+    searchKey,
+    isArrayObject,
+    data,
+    containerInputStyle,
+    placeholder,
+    onChangeSearch,
+    showAllMode,
+    customizeComponentInput,
+    propertiesButton,
+    textInputStyle,
+    buttonEnabled,
+  } = propertiesInput;
+  const { setShowAll } = propertiesButton;
+  const isCustomize = typeof customizeComponentInput?.InputCutom === 'function';
+  let Input = [];
+  // When is cutomize
+  if (isCustomize) {
+    const properties = {
+      onChangeSearchEngine: text =>
+      onChangeExecute({
+          isArrayObject,
+          text,
+          searchKey,
+          data,
+          showAllMode,
+          onChangeSearch,
+      }),
+      ...customizeComponentInput?.addPropsInput
+    };
+    Input = customizeComponentInput.InputCutom(properties);
+  } else {
+    Input = (
+      <TextInput
+        style={[
+          textInputStyle || Styles.textInput,
+          containerInputStyle || Styles.containerInput({ buttonEnabled }),
+        ]}
+        autoCompleteType={'off'}
+        onChangeText={text => {
+          setSearch(text);
+          setShowAll(showAllMode && text === '' ? true : false);
+          onChangeSearch &&
+            onChangeExecute({
+              isArrayObject,
+              text,
+              searchKey,
+              data,
+              onChangeSearch,
+              showAllMode,
+            });
+        }}
+        value={search}
+        placeholder={placeholder || 'Search'}
+      />
+    );
+  }
+  return Input;
+};
 
 const InputProcess = elements => {
   const {
     containerButtonStyle,
     propertiesInput,
-    textInputStyle,
-    containerInputStyle,
     containerIconStyle,
-    placeholder,
-    propertiesButton,
-    customizeComponentInput,
     customIcon,
-    onChangeElement,
-    buttonEnabled,
-    showAllMode,
   } = elements;
-  const { search, setSearch, searchKey, data, isArrayObject } = propertiesInput;
+  const { propertiesButton, buttonEnabled } = propertiesInput;
   const { showAll, setShowAll } = propertiesButton;
-  const isCustomize = typeof customizeComponentInput === 'function';
-  const isCustomizeIcon = typeof customIcon === 'function';
-  const isOnChangeElement = typeof onChangeElement === 'function';
 
-  const Input = isCustomize ? (
-    customizeComponentInput(propertiesInput)
-  ) : (
-    <TextInput
-      style={[
-        textInputStyle || Styles.textInput,
-        containerInputStyle || Styles.containerInput({ buttonEnabled }),
-      ]}
-      autoCompleteType={'off'}
-      onChangeText={text => {
-        setSearch(text);
-        setShowAll(showAllMode && text===''?true:false);
-        isOnChangeElement &&
-          onChangeExecute({
-            isArrayObject,
-            text,
-            searchKey,
-            data,
-            onChangeElement,
-            showAllMode,
-          });
-      }}
-      value={search}
-      placeholder={placeholder || 'Search'}
-    />
-  );
+  const isCustomizeIcon = typeof customIcon === 'function';
 
   const IconCustomize = isCustomizeIcon ? (
     customIcon()
@@ -75,7 +102,9 @@ const InputProcess = elements => {
   );
   return (
     <View style={{ flexDirection: 'row' }}>
-      <View style={{ width: buttonEnabled ? '80%' : '100%' }}>{Input}</View>
+      <View style={{ width: buttonEnabled ? '80%' : '100%' }}>
+        <InputText propertiesInput={propertiesInput} />
+      </View>
       {buttonEnabled ? button : <></>}
     </View>
   );

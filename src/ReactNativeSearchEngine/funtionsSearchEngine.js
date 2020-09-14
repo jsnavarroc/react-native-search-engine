@@ -6,7 +6,7 @@ export const onChangeExecute = elements => {
     text,
     searchKey,
     data,
-    onChangeElement,
+    onChangeSearch,
     showAllMode,
   } = elements;
   // Find elements
@@ -18,22 +18,34 @@ export const onChangeExecute = elements => {
     showAllMode,
   });
   if (elementObject.length > 0 && text.length > 0) {
-    onChangeElement({ data: elementObject, value: text });
+    onChangeSearch({ data: elementObject, value: text });
+    return { data: elementObject, value: text };
   }
   if (elementObject.length > 0 && showAllMode) {
-    onChangeElement({ data: elementObject, value: text });
+    onChangeSearch({ data: elementObject, value: text });
+    return { data: elementObject, value: text };
   }
   if (elementObject.length === 0) {
     if (isArrayObject) {
-      onChangeElement({ data: [], value: '' });
+      onChangeSearch({ data: [], value: '' });
+      return { data: [], value: '' };
     } else {
-      onChangeElement({ data: [], value: '' });
+      onChangeSearch({ data: [], value: '' });
+      return { data: [], value: '' };
     }
   }
 };
 
+
 export const filterArray = elements => {
-  const { search, searchKey, data, isArrayObject, showAllMode, showAll } = elements;
+  const {
+    search,
+    searchKey,
+    data,
+    isArrayObject,
+    showAllMode,
+    showAll,
+  } = elements;
   try {
     const dataFilder = filter(data, (element, key) => {
       let value = '';
@@ -49,8 +61,11 @@ export const filterArray = elements => {
         value.toLowerCase().search(search.toLowerCase()) === 0
       );
     });
-    
-    if ((isEmpty(search) && dataFilder.length === 0 && showAllMode) || showAll) {
+
+    if (
+      (isEmpty(search) && dataFilder.length === 0 && showAllMode) ||
+      showAll
+    ) {
       return data;
     }
 

@@ -23,19 +23,41 @@ const SearchEngine = props => {
     containerIconStyle,
     customIcon,
     placeholder,
-    onChangeElement,
+    onChangeSearch,
     buttonEnabled,
     showAllMode,
     showNothing,
-    value = ''
+    value = '',
   } = props;
   const isArrayObject = typeof data[0] === 'object';
+  const isCustomize = typeof customizeComponentInput?.InputCutom === 'function';
   const [search, setSearch] = useState(value);
   const [valueData, setValueData] = useState();
   const [showAll, setShowAll] = useState(showAllMode);
-  const filterElements = filterArray({ search, searchKey, data, isArrayObject, showAllMode, showAll });
-  const propertiesInput = { search, setSearch, searchKey, isArrayObject, data };
+  const filterElements = filterArray({
+    search,
+    searchKey,
+    data,
+    isArrayObject,
+    showAllMode,
+    showAll,
+  });
   const propertiesButton = { showAll, setShowAll };
+  const propertiesInput = {
+    search,
+    setSearch,
+    searchKey,
+    isArrayObject,
+    data,
+    containerInputStyle,
+    placeholder,
+    onChangeSearch,
+    showAllMode,
+    customizeComponentInput,
+    propertiesButton,
+    textInputStyle,
+    buttonEnabled,
+  };
   const elements = {
     setValueData,
     setSearch,
@@ -44,39 +66,31 @@ const SearchEngine = props => {
     textInfoStyle,
     containerTextInfoStyle,
     setShowAll,
-    onChangeElement,
+    onChangeSearch,
   };
   const scrollStyles = { ...Styles.containerScroll, ...containerScrollStyle };
   const isShow = search !== valueData && search !== '';
+  useEffect(() => {
+    onChangeSearch && onChangeSearch({ data: filterElements, value });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
-    onChangeElement({data:filterElements, value})
-  },[])
-
-  useEffect(() => { 
-    setSearch('')
-    setValueData('')
-  },[data])
+    setSearch('');
+    setValueData('');
+  }, [data]);
 
   return (
     <View style={style}>
       <InputProcess
         propertiesInput={propertiesInput}
-        propertiesButton={propertiesButton}
-        textInputStyle={textInputStyle}
-        containerInputStyle={containerInputStyle}
-        placeholder={placeholder}
-        customizeComponentInput={customizeComponentInput}
         containerButtonStyle={containerButtonStyle}
         customIcon={customIcon}
         containerIconStyle={containerIconStyle}
-        onChangeElement={onChangeElement}
         setShowAll={setShowAll}
-        buttonEnabled={buttonEnabled}
-        showAllMode={showAllMode}
       />
-      {(isShow || showAll) && !showNothing && (
-        <ScrollView style={scrollStyles} nestedScrollEnabled = {true}>
+      {(isShow || showAll) && !showNothing && !isCustomize && (
+        <ScrollView style={scrollStyles} nestedScrollEnabled={true}>
           <OptionProcess
             {...elements}
             searchKey={searchKey}
@@ -90,14 +104,14 @@ const SearchEngine = props => {
 
 export default SearchEngine;
 
-
 SearchEngine.defaultProps = {
   containerScrollStyle: {},
-  buttonEnabled: true,
+  buttonEnabled: false,
   showAllMode: false,
   showNothing: false,
+  onChangeSearch: () => {},
   data: [],
-  style: {}
+  style: {},
 };
 SearchEngine.propTypes = {
   searchKey: PropTypes.string,
@@ -114,8 +128,8 @@ SearchEngine.propTypes = {
   containerTextInfoStyle: PropTypes.object,
   containerButtonStyle: PropTypes.object,
   containerIconStyle: PropTypes.object,
-  customizeComponentInput: PropTypes.func,
-  onChangeElement: PropTypes.func,
+  customizeComponentInput: PropTypes.object,
+  onChangeSearch: PropTypes.func,
   customizComponenteResult: PropTypes.func,
   customIcon: PropTypes.func,
   data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
