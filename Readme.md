@@ -1,8 +1,10 @@
-# Alert the library is subject to change at least the next 5 months.
 # React Native Search Engine
+## Alert the library is subject to change at least the next 5 months.
+###  >> [Examples](https://github.com/jsnavarroc/serchEngineExample)
 ### It is a type of search engine like the "html5's browsers input", it can be used to auto-complete words or to search for elements within an array or object.
 
 <p align="center">
+    <img src="https://media.tenor.com/images/8f6b762fc94290066e11bf813830150e/tenor.gif" width="200" alt="accessibility text">
     <img src="https://i.ibb.co/Bc8C8St/Whats-App-Image-2020-07-18-at-11-00-19-AM.jpg" width="200" alt="accessibility text">
     <img src="https://i.ibb.co/n87tTD6/Whats-App-Image-2020-07-18-at-10-52-20-AM.jpg" width="200" alt="accessibility text">
     <img src="https://i.ibb.co/XY8NYHQ/Whats-App-Image-2020-07-18-at-10-58-51-AM.jpg" width="200" alt="accessibility text">
