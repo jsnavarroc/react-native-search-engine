@@ -1,4 +1,4 @@
-
+# Alert the library is subject to change at least the next 5 months.
 # React Native Search Engine
 ### It is a type of search engine like the "html5's browsers input", it can be used to auto-complete words or to search for elements within an array or object.
 
