@@ -30,15 +30,21 @@
 | containerTextInfoStyle    | Styles of information text containing    | { }         | Object  | Optional  |
 | containerButtonStyle      | Options display styles                   | { }         | Object  | Optional  |
 | containerIconStyle        | Icon Styles                              | { }         | Object  | Optional  |
-| onChangeElement           | Get the text or object                   | onChangeElement={object => setOption(object)} | Function  | Optional  |
-| customizeComponentInput   | Used to return an input component        | ({ search, setSearch }) => < CustomizeComponentInput/> | Function  | Optional  |
+| onChangeSearch           | Get the text or object                   | onChangeSearch={object => setOption(object)} | Function  | Optional  |
+| customizeComponentInput   | Used to return an input component        | customizeComponentInput | Object  | Optional  |
 | customizComponenteResult  | It is used to return an output component | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
 | customIcon                | This is used to customize the icon       | () => < CustomIcon/> | Function | Optional  |
 
 ------------ 
 
+={{InputCutom, addPropsInput}}
 
+When you want to customize the component you need set this customizeComponentInput object:
 
+| Name                      | Description                              | Default     | Type    | Criterion |
+|---------------------------|------------------------------------------|-------------|---------|-----------|
+|       InputCutom          |It is the input component that you want to set |undefine|  Array  |  Optional |
+|       addPropsInput          |The properties that you want to pass to the custom component |undefine|  Object  |  Optional |
 
 ## Warning 
 ### Strings beginning with the following characters will not be found:
@@ -83,7 +89,7 @@
      <SearchEngine
       data={data}
       searchKey={'properties.emails.0'}
-      onChangeElement={object => setOption(object)}
+      onChangeSearch={object => setOption(object)}
       buttonEnabled={true}
       placeholder={'email'}
     />
@@ -102,7 +108,7 @@
     <SearchEngine
       data={data}
       searchKey={'properties.emails.0'}
-      onChangeElement={object => setOption(object)}
+      onChangeSearch={object => setOption(object)}
       buttonEnabled={true}
       placeholder={'email'}
       containerIconStyle={styles.containerIconStyle}
@@ -160,7 +166,7 @@
     <SearchEngine
       data={data}
       searchKey={'properties.emails.0'}
-      onChangeElement={object => setOption(object)}
+      onChangeSearch={object => setOption(object)}
       placeholder={'email'}
       buttonEnabled={false}
       customizeComponentInput={properties => customizeInput(properties)}
@@ -186,7 +192,7 @@
 ------------ 
 
 ## Author
-Johan Navarro  | [https://johannavarro.com](https://d9tfdj43jyndf.cloudfront.net/)
+Johan Navarro  | [https://johannavarro.com](http://johansolution.com/)
 
 ------------ 
 

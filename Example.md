@@ -77,7 +77,7 @@ const customizeInput = properties => {
         value={search}
         placeholder="email"
         autoCorrect={false}
-        onChangeElement={object => setSearch(object)}
+        onChangeSearch={object => setSearch(object)}
         autoCapitalize="words"
         autoCompleteType="off"
       />
@@ -92,7 +92,7 @@ const ExampleSearchAutoComplet = () => {
     <SearchEngine
       data={dataArray}
       searchKey={'name'}
-      onChangeElement={text => setOption(text)}
+      onChangeSearch={text => setOption(text)}
       buttonEnabled={true}
       placeholder={'email'}
     />

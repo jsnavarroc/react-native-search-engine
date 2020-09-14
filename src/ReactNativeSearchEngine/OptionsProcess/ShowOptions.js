@@ -10,12 +10,12 @@ const Options = props => {
     customizComponenteResult,
     textInfoStyle,
     containerTextInfoStyle,
-    onChangeElement,
+    onChangeSearch,
     element,
     isArrayObject,
     searchKey,
   } = props;
-  const isOnChangeElement = typeof onChangeElement === 'function';
+  const isOnChangeElement = typeof onChangeSearch === 'function';
   const valueResult = isArrayObject
     ? get(element, searchKey).toString()
     : element.toString();
@@ -27,7 +27,7 @@ const Options = props => {
         setSearch(valueResult);
         setShowAll(false);
         isOnChangeElement &&
-          onChangeElement({ data: [element], value: valueResult });
+        onChangeSearch({ data: [element], value: valueResult });
       }}
     >
       <ShowInfoComponent
