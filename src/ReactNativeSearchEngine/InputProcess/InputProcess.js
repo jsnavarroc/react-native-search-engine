@@ -46,7 +46,6 @@ const IconCutom = props => {
       </View>
     </View>
   );
-  console.log({Incon,Button, a:isCustomizeIcon , buttonEnabled});
   if (isCustomizeIcon && !buttonEnabled) {
     return Incon;
   }
