@@ -1,9 +1,60 @@
 import React from 'react';
 import { TouchableOpacity, TextInput, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { isEmpty } from 'lodash';
 /* utilities */
-import { onChangeExecute, onChangeCutomExecute } from '../funtionsSearchEngine';
+import { onChangeExecute } from '../funtionsSearchEngine';
 import Styles from '../StyleSearchEngine';
+const IconCutom = props => {
+  const {
+    containerPropsIcon: {
+      showAll,
+      setShowAll,
+      containerButtonStyle,
+      containerIconStyle,
+      buttonEnabled,
+      leftIcon,
+    },
+  } = props;
+  const isCustomizeIcon = typeof leftIcon === 'function';
+  const IconCustomize = isCustomizeIcon ? (
+    leftIcon()
+  ) : (
+    <Icon name="caret-down" size={15} color="#737373" />
+  );
+
+  const Button = (
+    <TouchableOpacity
+      onPress={() => {
+        setShowAll(showAll ? false : true);
+      }}
+      style={{ ...Styles.containerTouch, ...containerButtonStyle }}
+    >
+      <View>
+        <View style={{ ...Styles.containerIcon, ...containerIconStyle }}>
+          {IconCustomize}
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+  const Incon = (
+    <View style={{ ...Styles.containerTouch, ...containerButtonStyle }}>
+      <View>
+        <View style={{ ...Styles.containerIcon, ...containerIconStyle }}>
+          {IconCustomize}
+        </View>
+      </View>
+    </View>
+  );
+  console.log({Incon,Button, a:isCustomizeIcon , buttonEnabled});
+  if (isCustomizeIcon && !buttonEnabled) {
+    return Incon;
+  }
+  if (buttonEnabled) {
+    return Button;
+  }
+  return <></>;
+};
 
 const InputText = ({ propertiesInput }) => {
   const {
@@ -20,31 +71,33 @@ const InputText = ({ propertiesInput }) => {
     propertiesButton,
     textInputStyle,
     buttonEnabled,
+    leftIcon,
   } = propertiesInput;
   const { setShowAll } = propertiesButton;
   const isCustomize = typeof customizeComponentInput?.InputCutom === 'function';
+  const showElement = typeof leftIcon === 'function' || buttonEnabled;
   let Input = [];
   // When is cutomize
   if (isCustomize) {
     const properties = {
       onChangeSearchEngine: text =>
-      onChangeExecute({
+        onChangeExecute({
           isArrayObject,
           text,
           searchKey,
           data,
           showAllMode,
           onChangeSearch,
-      }),
-      ...customizeComponentInput?.addPropsInput
+        }),
+      ...customizeComponentInput?.addPropsInput,
     };
     Input = customizeComponentInput.InputCutom(properties);
   } else {
     Input = (
       <TextInput
         style={[
-          textInputStyle || Styles.textInput,
-          containerInputStyle || Styles.containerInput({ buttonEnabled }),
+          { ...Styles.textInput, ...textInputStyle },
+          { ...Styles.containerInput({ showElement }), ...containerInputStyle },
         ]}
         autoCompleteType={'off'}
         onChangeText={text => {
@@ -73,39 +126,25 @@ const InputProcess = elements => {
     containerButtonStyle,
     propertiesInput,
     containerIconStyle,
-    customIcon,
   } = elements;
-  const { propertiesButton, buttonEnabled } = propertiesInput;
+  const { propertiesButton, buttonEnabled, leftIcon } = propertiesInput;
+  const showElement = typeof leftIcon === 'function' || buttonEnabled
   const { showAll, setShowAll } = propertiesButton;
+  const containerPropsIcon = {
+    showAll,
+    setShowAll,
+    containerButtonStyle,
+    containerIconStyle,
+    buttonEnabled,
+    leftIcon,
+  };
 
-  const isCustomizeIcon = typeof customIcon === 'function';
-
-  const IconCustomize = isCustomizeIcon ? (
-    customIcon()
-  ) : (
-    <Icon name="caret-down" size={15} color="#737373" />
-  );
-
-  const button = (
-    <TouchableOpacity
-      onPress={() => {
-        setShowAll(showAll ? false : true);
-      }}
-      style={containerButtonStyle || Styles.containerTouch}
-    >
-      <View>
-        <View style={containerIconStyle || Styles.containerIcon}>
-          {IconCustomize}
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
   return (
     <View style={{ flexDirection: 'row' }}>
-      <View style={{ width: buttonEnabled ? '80%' : '100%' }}>
+      <View style={{ width: showElement ? '80%' : '100%' }}>
         <InputText propertiesInput={propertiesInput} />
       </View>
-      {buttonEnabled ? button : <></>}
+      <IconCutom containerPropsIcon={containerPropsIcon} />
     </View>
   );
 };

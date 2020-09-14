@@ -21,7 +21,7 @@ const SearchEngine = props => {
     containerTextInfoStyle,
     containerButtonStyle,
     containerIconStyle,
-    customIcon,
+    leftIcon,
     placeholder,
     onChangeSearch,
     buttonEnabled,
@@ -57,6 +57,7 @@ const SearchEngine = props => {
     propertiesButton,
     textInputStyle,
     buttonEnabled,
+    leftIcon,
   };
   const elements = {
     setValueData,
@@ -85,7 +86,6 @@ const SearchEngine = props => {
       <InputProcess
         propertiesInput={propertiesInput}
         containerButtonStyle={containerButtonStyle}
-        customIcon={customIcon}
         containerIconStyle={containerIconStyle}
         setShowAll={setShowAll}
       />
@@ -131,6 +131,6 @@ SearchEngine.propTypes = {
   customizeComponentInput: PropTypes.object,
   onChangeSearch: PropTypes.func,
   customizComponenteResult: PropTypes.func,
-  customIcon: PropTypes.func,
+  leftIcon: PropTypes.func,
   data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };

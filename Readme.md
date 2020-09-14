@@ -35,7 +35,7 @@
 | onChangeSearch           | Get the text or object                   | onChangeSearch={object => setOption(object)} | Function  | Optional  |
 | customizeComponentInput   | Used to return an input component        | customizeComponentInput | Object  | Optional  |
 | customizComponenteResult  | It is used to return an output component | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
-| customIcon                | This is used to customize the icon       | () => < CustomIcon/> | Function | Optional  |
+| leftIcon                | This is used to customize the icon       | () => < leftIcon/> | Function | Optional  |
 
 ------------ 
 
@@ -118,7 +118,7 @@ When you want to customize the component you need set this customizeComponentInp
       containerScrollStyle={styles.containerScrollStyle}
       containerTextInfoStyle={styles.containerTextInfoStyle}
       containerButtonStyle={styles.containerButtonStyle}
-      customIcon={() => <Icon name="arrow-down" />}
+      leftIcon={() => <Icon name="arrow-down" />}
     />
 ```
 

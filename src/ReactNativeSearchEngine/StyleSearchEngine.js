@@ -18,19 +18,19 @@ const Styles = StyleSheet.create({
     fontSize: 17,
     textAlign: 'left',
   },
-  containerInput: ({ buttonEnabled }) => ({
+  containerInput: ({ showElement }) => ({
     borderLeftWidth: 1,
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderRightWidth: buttonEnabled ? 0 : 1,
+    borderRightWidth: showElement ? 0 : 1,
     borderTopColor: 'rgba(211, 211, 211, 1)',
     borderBottomColor: 'rgba(211, 211, 211, 1)',
     borderRightColor: 'rgba(211, 211, 211, 1)',
     borderLeftColor: 'rgba(211, 211, 211,1)',
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
-    borderTopRightRadius: buttonEnabled ? 0 : 10,
-    borderBottomRightRadius: buttonEnabled ? 0 : 10,
+    borderTopRightRadius: showElement ? 0 : 10,
+    borderBottomRightRadius: showElement ? 0 : 10,
     padding: 12,
   }),
   containerTouch: {
@@ -54,15 +54,18 @@ const Styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 18,
   },
-  containerTextInfo: ({ isEmpetyText }) => ({
+  containerTextInfo: {
     borderWidth: 1,
     borderColor: '#d3d3d3',
-    backgroundColor: isEmpetyText ? 'red' : '#fff',
     borderRadius: 10,
     height: 50,
     padding: 12,
     marginBottom: 1,
-  }),
+  },
+  iconInput: {
+    flexDirection: 'row',
+    width:'100%'
+  }
 });
 
 export default Styles;

@@ -13,14 +13,15 @@ const ShowInfoComponent = props => {
   const isCustomize = typeof customizComponenteResult === 'function';
   const textInfo = get(properties, 'valueResult');
   const isEmpetyText = isEmpty(textInfo);
+  let styleShowText = {
+    ...Styles.containerTextInfo,
+    ...containerTextInfoStyle,
+  };
+  styleShowText = isEmpetyText? {...styleShowText, backgroundColor:  'red'}: styleShowText;
   return isCustomize ? (
     customizComponenteResult(properties)
   ) : (
-    <View
-      style={
-        containerTextInfoStyle || Styles.containerTextInfo({ isEmpetyText })
-      }
-    >
+    <View style={styleShowText} >
       <Text style={textInfoStyle || Styles.textInfo}>
         {textInfo || "can't find the search key"}
       </Text>
