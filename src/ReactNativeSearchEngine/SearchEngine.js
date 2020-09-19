@@ -26,8 +26,9 @@ const SearchEngine = props => {
     onChangeSearch,
     buttonEnabled,
     showAllMode,
-    showNothing,
+    showNoResults,
     value = '',
+    textEmpty
   } = props;
   const isArrayObject = typeof data[0] === 'object';
   const isCustomize = typeof customizeComponentInput?.InputCutom === 'function';
@@ -62,16 +63,20 @@ const SearchEngine = props => {
   const elements = {
     setValueData,
     setSearch,
+    search,
     filterElements,
     customizComponenteResult,
     textInfoStyle,
     containerTextInfoStyle,
     setShowAll,
     onChangeSearch,
+    showNoResults,
+    textEmpty
   };
   const scrollStyles = { ...Styles.containerScroll, ...containerScrollStyle };
-  const isShow = search !== valueData && search !== '';
+ 
   useEffect(() => {
+    // Pendiente: colocar que no mande la data de una si no que la mande cuando complete el input (Pensar primero)
     onChangeSearch && onChangeSearch({ data: filterElements, value });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -89,7 +94,7 @@ const SearchEngine = props => {
         containerIconStyle={containerIconStyle}
         setShowAll={setShowAll}
       />
-      {(isShow || showAll) && !showNothing && !isCustomize && (
+ 
         <ScrollView style={scrollStyles} nestedScrollEnabled={true}>
           <OptionProcess
             {...elements}
@@ -97,7 +102,6 @@ const SearchEngine = props => {
             isArrayObject={isArrayObject}
           />
         </ScrollView>
-      )}
     </View>
   );
 };
@@ -108,7 +112,8 @@ SearchEngine.defaultProps = {
   containerScrollStyle: {},
   buttonEnabled: false,
   showAllMode: false,
-  showNothing: false,
+  showNoResults: false,
+  textEmpty:'Item not found',
   onChangeSearch: () => {},
   data: [],
   style: {},
@@ -119,7 +124,7 @@ SearchEngine.propTypes = {
   placeholder: PropTypes.string,
   buttonEnabled: PropTypes.bool,
   showAllMode: PropTypes.bool,
-  showNothing: PropTypes.bool,
+  showNoResults: PropTypes.bool,
   style: PropTypes.object,
   textInfoStyle: PropTypes.object,
   textInputStyle: PropTypes.object,

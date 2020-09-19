@@ -1,13 +1,29 @@
 import React from 'react';
-import { get, isEmpty } from 'lodash';
+import { get, isEmpty, isEqual } from 'lodash';
 
 import ShowOptions from './ShowOptions';
 import ShowInfoComponent from './ShowInfoComponent';
 
 const OptionProcess = props => {
-  const { searchKey, filterElements, isArrayObject } = props;
+  const { searchKey, filterElements, isArrayObject, search, showNoResults, textEmpty} = props;
+
+  // Solo cuando este el boton activo funciona.
+  if (!isEmpty(filterElements)) { 
+    const valueFoud = get(filterElements[0], searchKey).toString().toLowerCase() || '';
+    const ifFoundExactItem =  isEqual(search.toLowerCase(), valueFoud)
+    const elemetFount = filterElements.length === 1 && ifFoundExactItem
+    if (elemetFount) { 
+      return []
+    }
+  }
+  if (isEmpty(filterElements) && !isEmpty(search) && !showNoResults) { 
+    return <ShowInfoComponent textEmpty={textEmpty} />;
+  }
+  if (showNoResults) {
+    return [];
+  }
   return isEmpty(searchKey) && isArrayObject ? (
-    <ShowInfoComponent />
+    <ShowInfoComponent  textEmpty={'The search lead is not correct'}/>
   ) : (
     filterElements.map((element, key) => {
       return <ShowOptions {...props} key={key} element={element} />;

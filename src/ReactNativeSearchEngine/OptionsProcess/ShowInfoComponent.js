@@ -9,6 +9,7 @@ const ShowInfoComponent = props => {
     properties,
     textInfoStyle,
     containerTextInfoStyle,
+    textEmpty,
   } = props;
   const isCustomize = typeof customizComponenteResult === 'function';
   const textInfo = get(properties, 'valueResult');
@@ -23,7 +24,7 @@ const ShowInfoComponent = props => {
   ) : (
     <View style={styleShowText} >
       <Text style={textInfoStyle || Styles.textInfo}>
-        {textInfo || "can't find the search key"}
+          {textInfo || textEmpty}
       </Text>
     </View>
   );

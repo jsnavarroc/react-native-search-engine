@@ -61,14 +61,13 @@ export const filterArray = elements => {
         value.toLowerCase().search(search.toLowerCase()) === 0
       );
     });
-
+    // if show All is because is that you want to show all the data when the string does not match any of the elements.
     if (
-      (isEmpty(search) && dataFilder.length === 0 && showAllMode) ||
+      ((isEmpty(search) && showAllMode) || (dataFilder.length === 0 && showAllMode)) ||
       showAll
     ) {
       return data;
     }
-
     return dataFilder;
   } catch (error) {
     // Doesn't support this symbols "+,(,),*,?,\,["
