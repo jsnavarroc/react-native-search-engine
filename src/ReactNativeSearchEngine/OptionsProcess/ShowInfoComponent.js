@@ -15,7 +15,7 @@ const ShowInfoComponent = props => {
   } = props;
   const isCustomize = typeof customizComponenteResult === 'function';
   const textInfo = get(properties, 'valueResult');
-  const isEmpetyText = isEmpty(textInfo);
+  const isEmptyText = isEmpty(textInfo);
   let styleShowTextOk = {
     ...Styles.containerTextInfo,
     ...containerTextInfoStyle,
@@ -33,12 +33,12 @@ const ShowInfoComponent = props => {
     ...containerTextError,
   };
 
-  const styleShowText = isEmpetyText? {...styleShowError}: styleShowTextOk;
+  const styleShowText = isEmptyText? styleShowError: styleShowTextOk;
   return isCustomize ? (
     customizComponenteResult(properties)
   ) : (
     <View style={styleShowText} >
-        <Text style={isEmpetyText ? styleTextInfoOk : styleTextInfoError}>
+        <Text style={isEmptyText ? styleTextInfoError  : styleTextInfoOk }>
           {textInfo || textEmpty}
       </Text>
     </View>
