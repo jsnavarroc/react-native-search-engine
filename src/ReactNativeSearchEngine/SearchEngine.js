@@ -20,6 +20,7 @@ const SearchEngine = props => {
     textInfoStyle,
     containerTextInfoStyle,
     containerTextError,
+    textInfoStyleError,
     containerButtonStyle,
     containerIconStyle,
     leftIcon,
@@ -68,6 +69,7 @@ const SearchEngine = props => {
     filterElements,
     customizComponenteResult,
     textInfoStyle,
+    textInfoStyleError,
     containerTextInfoStyle,
     containerTextError,
     setShowAll,
@@ -139,5 +141,7 @@ SearchEngine.propTypes = {
   onChangeSearch: PropTypes.func,
   customizComponenteResult: PropTypes.func,
   leftIcon: PropTypes.func,
+  containerTextError: PropTypes.object,
+  textInfoStyleError: PropTypes.object,
   data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };

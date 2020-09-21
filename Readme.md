@@ -28,8 +28,10 @@
 | textInputStyle            | Input text styles                        | { }         | Object  | Optional  |
 | placeholder               | Help text                                | 'Search'    | String  | Optional  |
 | containerInputStyle       | Styles of input text containing          | { }         | Object  | Optional  |
-| containerScrollStyle      | Text tag container stylesl               | { }         | Object  | Optional  |
 | containerTextInfoStyle    | Styles of information text containing    | { }         | Object  | Optional  |
+| containerTextError        | Styles of input text containing          | { }         | Object  | Optional  |
+| textInfoStyleError        | Styles of information text containing    | { }         | Object  | Optional  |
+| containerScrollStyle      | Text tag container stylesl               | { }         | Object  | Optional  |
 | containerButtonStyle      | Options display styles                   | { }         | Object  | Optional  |
 | containerIconStyle        | Icon Styles                              | { }         | Object  | Optional  |
 | onChangeSearch           | Get the text or object                   | onChangeSearch={object => setOption(object)} | Function  | Optional  |

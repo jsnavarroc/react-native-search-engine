@@ -5,7 +5,7 @@ import ShowOptions from './ShowOptions';
 import ShowInfoComponent from './ShowInfoComponent';
 
 const OptionProcess = props => {
-  const { searchKey, filterElements, isArrayObject, search, showNoResults, textEmpty, containerTextError} = props;
+  const { searchKey, filterElements, isArrayObject, search, showNoResults, textEmpty} = props;
   // Solo cuando este el boton activo funciona.
   if (!isEmpty(filterElements)) { 
     const valueFoud = get(filterElements[0], searchKey).toString().toLowerCase() || '';
@@ -16,13 +16,13 @@ const OptionProcess = props => {
     }
   }
   if (isEmpty(filterElements) && !isEmpty(search) && !showNoResults) { 
-    return <ShowInfoComponent textEmpty={textEmpty} containerTextError={containerTextError} />;
+    return <ShowInfoComponent textEmpty={textEmpty} {...props} />;
   }
   if (showNoResults) {
     return [];
   }
   return isEmpty(searchKey) && isArrayObject ? (
-    <ShowInfoComponent  textEmpty={'The search key is not correct'} containerTextError={containerTextError}/>
+    <ShowInfoComponent  textEmpty={'The search key is not correct'} {...props}/>
   ) : (
     filterElements.map((element, key) => {
       return <ShowOptions {...props} key={key} element={element} />;
