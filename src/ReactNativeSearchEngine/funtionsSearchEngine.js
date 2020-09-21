@@ -63,9 +63,7 @@ export const filterArray = elements => {
     });
     // if show All is because is that you want to show all the data when the string does not match any of the elements.
     if (
-      ((isEmpty(search) && showAllMode) || (dataFilder.length === 0 && showAllMode)) ||
-      showAll
-    ) {
+      (isEmpty(search) && showAllMode) || showAll ) {
       return data;
     }
     return dataFilder;

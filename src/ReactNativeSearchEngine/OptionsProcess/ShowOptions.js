@@ -14,6 +14,7 @@ const Options = props => {
     element,
     isArrayObject,
     searchKey,
+    containerTextError
   } = props;
   const isOnChangeElement = typeof onChangeSearch === 'function';
   const valueResult = isArrayObject
@@ -35,6 +36,7 @@ const Options = props => {
         properties={properties}
         textInfoStyle={textInfoStyle}
         containerTextInfoStyle={containerTextInfoStyle}
+        containerTextError={containerTextError} 
       />
     </TouchableOpacity>
   );

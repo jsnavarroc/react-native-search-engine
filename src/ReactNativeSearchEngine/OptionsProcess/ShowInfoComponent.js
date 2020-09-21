@@ -9,6 +9,7 @@ const ShowInfoComponent = props => {
     properties,
     textInfoStyle,
     containerTextInfoStyle,
+    containerTextError,
     textEmpty,
   } = props;
   const isCustomize = typeof customizComponenteResult === 'function';
@@ -18,7 +19,11 @@ const ShowInfoComponent = props => {
     ...Styles.containerTextInfo,
     ...containerTextInfoStyle,
   };
-  styleShowText = isEmpetyText? {...styleShowText, backgroundColor:  'red'}: styleShowText;
+  let styleShowError = {
+    ...Styles.containerTextInfo,
+    ...containerTextError,
+  };
+  styleShowText = isEmpetyText? {...styleShowError}: styleShowText;
   return isCustomize ? (
     customizComponenteResult(properties)
   ) : (
@@ -30,4 +35,11 @@ const ShowInfoComponent = props => {
   );
 };
 
+
+ShowInfoComponent.defaultProps = {
+  containerTextError: {
+    backgroundColor: 'red',
+  },
+};
 export default ShowInfoComponent;
+
