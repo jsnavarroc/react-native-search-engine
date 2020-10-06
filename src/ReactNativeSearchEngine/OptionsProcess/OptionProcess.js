@@ -22,7 +22,7 @@ const OptionProcess = props => {
     return [];
   }
   return isEmpty(searchKey) && isArrayObject ? (
-    <ShowInfoComponent  textEmpty={'The search key is not correct'} {...props}/>
+    <ShowInfoComponent {...props}/>
   ) : (
     filterElements.map((element, key) => {
       return <ShowOptions {...props} key={key} element={element} />;

@@ -50,6 +50,7 @@ ShowInfoComponent.defaultProps = {
   containerTextError: {
     backgroundColor: 'red',
   },
+  textEmpty:'The search key is not correct',
 };
 export default ShowInfoComponent;
 

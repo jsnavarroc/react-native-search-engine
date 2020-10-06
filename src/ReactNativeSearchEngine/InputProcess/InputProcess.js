@@ -15,7 +15,6 @@ const IconCutom = props => {
       buttonEnabled,
       leftIcon,
     },
-    error
   } = props;
   const isCustomizeIcon = typeof leftIcon === 'function';
   const IconCustomize = isCustomizeIcon ? (
@@ -29,7 +28,7 @@ const IconCutom = props => {
       onPress={() => {
         setShowAll(showAll ? false : true);
       }}
-      style={{ ...Styles.containerTouch({error}), ...containerButtonStyle }}
+      style={{ ...Styles.containerTouch, ...containerButtonStyle }}
     >
       <View>
         <View style={{ ...Styles.containerIcon, ...containerIconStyle }}>
@@ -72,7 +71,6 @@ const InputText = ({ propertiesInput }) => {
     textInputStyle,
     buttonEnabled,
     leftIcon,
-    error
   } = propertiesInput;
   const { setShowAll } = propertiesButton;
   const isCustomize = typeof customizeComponentInput?.InputCutom === 'function';
@@ -98,7 +96,7 @@ const InputText = ({ propertiesInput }) => {
       <TextInput
         style={[
           { ...Styles.textInput, ...textInputStyle },
-          { ...Styles.containerInput({ showElement, error }), ...containerInputStyle },
+          { ...Styles.containerInput({ showElement }), ...containerInputStyle },
         ]}
         autoCompleteType={'off'}
         onChangeText={text => {
@@ -145,7 +143,7 @@ const InputProcess = elements => {
       <View style={{ width: showElement ? '80%' : '100%' }}>
         <InputText propertiesInput={propertiesInput} />
       </View>
-      <IconCutom containerPropsIcon={containerPropsIcon} error={propertiesInput.error}/>
+      <IconCutom containerPropsIcon={containerPropsIcon} />
     </View>
   );
 };

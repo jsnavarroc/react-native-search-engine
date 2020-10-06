@@ -47,6 +47,10 @@ export const filterArray = elements => {
     showAll,
   } = elements;
   try {
+    // if show All is because is that you want to show all the data when the string does not match any of the elements.
+    if (isEmpty(search) && (showAllMode || showAll) ) {
+      return data;
+    }
     const dataFilder = filter(data, (element, key) => {
       let value = '';
       if (isArrayObject) {
@@ -61,11 +65,6 @@ export const filterArray = elements => {
         value.toLowerCase().search(search.toLowerCase()) === 0
       );
     });
-    // if show All is because is that you want to show all the data when the string does not match any of the elements.
-    if (
-      (isEmpty(search) && showAllMode) || showAll ) {
-      return data;
-    }
     return dataFilder;
   } catch (error) {
     // Doesn't support this symbols "+,(,),*,?,\,["
