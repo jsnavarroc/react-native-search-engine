@@ -29,9 +29,9 @@ const SearchEngine = props => {
     buttonEnabled,
     showAllMode,
     showNoResults,
-    value = '',
+    value,
     textEmpty
-  } = props;
+  } = props;  
   const isArrayObject = typeof data[0] === 'object';
   const isCustomize = typeof customizeComponentInput?.InputCutom === 'function';
   const [search, setSearch] = useState(value);
@@ -45,6 +45,7 @@ const SearchEngine = props => {
     showAllMode,
     showAll,
   });
+
   const propertiesButton = { showAll, setShowAll };
   const propertiesInput = {
     search,
@@ -78,17 +79,19 @@ const SearchEngine = props => {
     textEmpty
   };
   const scrollStyles = { ...Styles.containerScroll, ...containerScrollStyle };
- 
+
+  useEffect(() => {
+    setSearch(value);
+    setValueData('');
+  }, [data]);
+
   useEffect(() => {
     // Pendiente: colocar que no mande la data de una si no que la mande cuando complete el input (Pensar primero)
     onChangeSearch && onChangeSearch({ data: filterElements, value });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    setSearch('');
-    setValueData('');
-  }, [data]);
+
 
   return (
     <View style={style}>
@@ -121,6 +124,7 @@ SearchEngine.defaultProps = {
   onChangeSearch: () => {},
   data: [],
   style: {},
+  value: '',
 };
 SearchEngine.propTypes = {
   searchKey: PropTypes.string,

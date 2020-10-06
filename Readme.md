@@ -34,10 +34,11 @@
 | containerScrollStyle      | Text tag container stylesl               | { }         | Object  | Optional  |
 | containerButtonStyle      | Options display styles                   | { }         | Object  | Optional  |
 | containerIconStyle        | Icon Styles                              | { }         | Object  | Optional  |
-| onChangeSearch           | Get the text or object                   | onChangeSearch={object => setOption(object)} | Function  | Optional  |
+| onChangeSearch           | Get the text or object                    | onChangeSearch={object => setOption(object)} | Function  | Optional  |
 | customizeComponentInput   | Used to return an input component        | customizeComponentInput | Object  | Optional  |
 | customizComponenteResult  | It is used to return an output component | ({ valueResult, element }) => < CustomizComponenteResult/> | Function | Optional  |
-| leftIcon                | This is used to customize the icon       | () => < leftIcon/> | Function | Optional  |
+| leftIcon                | This is used to customize the icon         | () => < leftIcon/> | Function | Optional  |
+| error        | you can set if have or no error                       |  false    | Boolean  | Optional  |
 
 ------------ 
 
