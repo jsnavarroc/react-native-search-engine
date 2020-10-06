@@ -12,6 +12,7 @@ const SearchEngine = props => {
     searchKey,
     data,
     style,
+    error,
     customizComponenteResult,
     customizeComponentInput,
     containerScrollStyle,
@@ -62,6 +63,7 @@ const SearchEngine = props => {
     textInputStyle,
     buttonEnabled,
     leftIcon,
+    error,
   };
   const elements = {
     setValueData,
@@ -125,6 +127,7 @@ SearchEngine.defaultProps = {
   data: [],
   style: {},
   value: '',
+  error:false,
 };
 SearchEngine.propTypes = {
   searchKey: PropTypes.string,
@@ -147,5 +150,6 @@ SearchEngine.propTypes = {
   leftIcon: PropTypes.func,
   containerTextError: PropTypes.object,
   textInfoStyleError: PropTypes.object,
+  error: PropTypes.bool,
   data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };
