@@ -44,11 +44,23 @@ export const filterArray = elements => {
     data,
     isArrayObject,
     showAllMode,
-    showAll,
+    showAllButton,
   } = elements;
   try {
     // if show All is because is that you want to show all the data when the string does not match any of the elements.
-    if (isEmpty(search) && (showAllMode || showAll) ) {
+    if (isEmpty(search) && showAllMode) { 
+      return data;
+    }
+    if (showAllButton && showAllMode) {
+      return data;
+    }
+    if (isEmpty(search) && showAllMode && !showAllButton ) { 
+      return [];
+    }
+    if (isEmpty(search) && showAllMode ) { 
+      return data;
+    }
+    if (!showAllMode && showAllButton) { 
       return data;
     }
     const dataFilder = filter(data, (element, key) => {

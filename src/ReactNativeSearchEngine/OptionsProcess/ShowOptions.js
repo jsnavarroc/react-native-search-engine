@@ -6,7 +6,7 @@ const Options = props => {
   const {
     setValueData,
     setSearch,
-    setShowAll,
+    setShowAllButton,
     customizComponenteResult,
     textInfoStyle,
     containerTextInfoStyle,
@@ -26,7 +26,7 @@ const Options = props => {
       onPress={() => {
         setValueData(valueResult);
         setSearch(valueResult);
-        setShowAll(false);
+        setShowAllButton(false);
         isOnChangeElement &&
         onChangeSearch({ data: [element], value: valueResult });
       }}

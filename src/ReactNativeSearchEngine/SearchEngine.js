@@ -4,6 +4,7 @@ import Styles from './StyleSearchEngine';
 import PropTypes from 'prop-types';
 import OptionProcess from './OptionsProcess/OptionProcess';
 import InputProcess from './InputProcess/InputProcess';
+import { isEmpty } from 'lodash';
 
 import { filterArray } from './funtionsSearchEngine';
 
@@ -37,17 +38,17 @@ const SearchEngine = props => {
   const isCustomize = typeof customizeComponentInput?.InputCutom === 'function';
   const [search, setSearch] = useState(value);
   const [valueData, setValueData] = useState();
-  const [showAll, setShowAll] = useState(showAllMode);
+  const [showAllButton, setShowAllButton] = useState(showAllMode);
   const filterElements = filterArray({
     search,
     searchKey,
     data,
     isArrayObject,
     showAllMode,
-    showAll,
+    showAllButton,
   });
 
-  const propertiesButton = { showAll, setShowAll };
+  const propertiesButton = { showAllButton, setShowAllButton };
   const propertiesInput = {
     search,
     setSearch,
@@ -75,7 +76,7 @@ const SearchEngine = props => {
     textInfoStyleError,
     containerTextInfoStyle,
     containerTextError,
-    setShowAll,
+    setShowAllButton,
     onChangeSearch,
     showNoResults,
     textEmpty,
@@ -90,9 +91,9 @@ const SearchEngine = props => {
 
   useEffect(() => {
     // Pendiente: colocar que no mande la data de una si no que la mande cuando complete el input (Pensar primero)
-    onChangeSearch && onChangeSearch({ data: filterElements, value });
+    !isEmpty(filterElements) && onChangeSearch && onChangeSearch({ data: filterElements, value });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data]);
 
 
 
@@ -102,7 +103,7 @@ const SearchEngine = props => {
         propertiesInput={propertiesInput}
         containerButtonStyle={containerButtonStyle}
         containerIconStyle={containerIconStyle}
-        setShowAll={setShowAll}
+        setShowAllButton={setShowAllButton}
       />
  
         <ScrollView style={scrollStyles} nestedScrollEnabled={true}>

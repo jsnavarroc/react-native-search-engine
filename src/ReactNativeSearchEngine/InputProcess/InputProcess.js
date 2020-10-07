@@ -8,8 +8,8 @@ import Styles from '../StyleSearchEngine';
 const IconCutom = props => {
   const {
     containerPropsIcon: {
-      showAll,
-      setShowAll,
+      showAllButton,
+      setShowAllButton,
       containerButtonStyle,
       containerIconStyle,
       buttonEnabled,
@@ -27,7 +27,7 @@ const IconCutom = props => {
   const Button = (
     <TouchableOpacity
       onPress={() => {
-        setShowAll(showAll ? false : true);
+        setShowAllButton(showAllButton ? false : true);
       }}
       style={{ ...Styles.containerTouch({error}), ...containerButtonStyle }}
     >
@@ -74,7 +74,7 @@ const InputText = ({ propertiesInput }) => {
     leftIcon,
     error,
   } = propertiesInput;
-  const { setShowAll } = propertiesButton;
+  const { setShowAllButton } = propertiesButton;
   const isCustomize = typeof customizeComponentInput?.InputCutom === 'function';
   const showElement = typeof leftIcon === 'function' || buttonEnabled;
   let Input = [];
@@ -103,7 +103,7 @@ const InputText = ({ propertiesInput }) => {
         autoCompleteType={'off'}
         onChangeText={text => {
           setSearch(text);
-          setShowAll(showAllMode && text === '' ? true : false);
+          setShowAllButton(showAllMode && text === '' ? true : false);
           onChangeSearch &&
             onChangeExecute({
               isArrayObject,
@@ -130,10 +130,10 @@ const InputProcess = elements => {
   } = elements;
   const { propertiesButton, buttonEnabled, leftIcon } = propertiesInput;
   const showElement = typeof leftIcon === 'function' || buttonEnabled
-  const { showAll, setShowAll } = propertiesButton;
+  const { showAllButton, setShowAllButton } = propertiesButton;
   const containerPropsIcon = {
-    showAll,
-    setShowAll,
+    showAllButton,
+    setShowAllButton,
     containerButtonStyle,
     containerIconStyle,
     buttonEnabled,
