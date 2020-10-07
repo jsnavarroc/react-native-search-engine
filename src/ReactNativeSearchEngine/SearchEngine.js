@@ -78,7 +78,8 @@ const SearchEngine = props => {
     setShowAll,
     onChangeSearch,
     showNoResults,
-    textEmpty
+    textEmpty,
+    data
   };
   const scrollStyles = { ...Styles.containerScroll, ...containerScrollStyle };
 
