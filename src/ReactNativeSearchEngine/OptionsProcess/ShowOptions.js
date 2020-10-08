@@ -14,7 +14,8 @@ const Options = props => {
     element,
     isArrayObject,
     searchKey,
-    containerTextError
+    containerTextError,
+    onPressOption,
   } = props;
   const isOnChangeElement = typeof onChangeSearch === 'function';
   const valueResult = isArrayObject
@@ -23,12 +24,13 @@ const Options = props => {
   const properties = { valueResult, element };
   return (
     <TouchableOpacity
-      onPress={() => {
+      onPress={(e) => {
         setValueData(valueResult);
         setSearch(valueResult);
         setShowAllButton(false);
         isOnChangeElement &&
-        onChangeSearch({ data: [element], value: valueResult });
+          onChangeSearch({ data: [element], value: valueResult });
+        onPressOption && onPressOption({...e,  data: [element], value: valueResult})
       }}
     >
       <ShowInfoComponent

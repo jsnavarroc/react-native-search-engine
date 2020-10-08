@@ -70,11 +70,13 @@ export const filterArray = elements => {
       } else {
         value = element;
       }
-      const doesntFindSymbol = search.toString().search(/[.|^:]/g) === -1;
+      const searchClean = search.toString().replace(/[|^:]/, '');
+      const valueClean = value.toString().replace(/[|^:]/, '');
+      const doesntFindSymbol = search.toString().search(/[|^:]/) === -1;
       return (
-        !isEmpty(search) &&
+        !isEmpty(searchClean) &&
         doesntFindSymbol &&
-        value.toLowerCase().search(search.toLowerCase()) === 0
+        valueClean.toLowerCase().search(searchClean.toLowerCase()) === 0
       );
     });
     return dataFilder;

@@ -32,12 +32,18 @@ const SearchEngine = props => {
     showAllMode,
     showNoResults,
     value,
-    textEmpty
+    textEmpty,
+    onBlur, 
+    onFocus,
+    onPressOption,
   } = props;  
   const isArrayObject = typeof data[0] === 'object';
   const isCustomize = typeof customizeComponentInput?.InputCutom === 'function';
   const [search, setSearch] = useState(value);
   const [valueData, setValueData] = useState();
+  const [onInput, setOnInput] = useState({
+    showOptions:true
+  });
   const [showAllButton, setShowAllButton] = useState(showAllMode);
   const filterElements = filterArray({
     search,
@@ -65,6 +71,9 @@ const SearchEngine = props => {
     buttonEnabled,
     leftIcon,
     error,
+    onBlur,
+    setOnInput,
+    onInput,
   };
   const elements = {
     setValueData,
@@ -80,6 +89,8 @@ const SearchEngine = props => {
     onChangeSearch,
     showNoResults,
     textEmpty,
+    onPressOption,
+    onInput,
     data
   };
   const scrollStyles = { ...Styles.containerScroll, ...containerScrollStyle };
@@ -91,7 +102,7 @@ const SearchEngine = props => {
 
   useEffect(() => {
     // Pendiente: colocar que no mande la data de una si no que la mande cuando complete el input (Pensar primero)
-    !isEmpty(filterElements) && onChangeSearch && onChangeSearch({ data: filterElements, value });
+    // !isEmpty(filterElements) && onChangeSearch && onChangeSearch({ data: filterElements, value });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
@@ -126,6 +137,9 @@ SearchEngine.defaultProps = {
   showNoResults: false,
   textEmpty:'Item not found',
   onChangeSearch: () => {},
+  onPressOption: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
   data: [],
   style: {},
   value: '',
@@ -147,11 +161,14 @@ SearchEngine.propTypes = {
   containerButtonStyle: PropTypes.object,
   containerIconStyle: PropTypes.object,
   customizeComponentInput: PropTypes.object,
-  onChangeSearch: PropTypes.func,
   customizComponenteResult: PropTypes.func,
   leftIcon: PropTypes.func,
   containerTextError: PropTypes.object,
   textInfoStyleError: PropTypes.object,
   error: PropTypes.bool,
   data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  onChangeSearch: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  onPressOption: PropTypes.func,
 };

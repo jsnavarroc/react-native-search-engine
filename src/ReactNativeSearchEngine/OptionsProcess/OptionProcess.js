@@ -4,8 +4,10 @@ import { get, isEmpty, isEqual } from 'lodash';
 import ShowOptions from './ShowOptions';
 import ShowInfoComponent from './ShowInfoComponent';
 
+
+
 const OptionProcess = props => {
-  const { searchKey, filterElements, isArrayObject, search, showNoResults, textEmpty, data} = props;
+  const { searchKey, filterElements, isArrayObject, search, showNoResults, textEmpty, data, onInput} = props;
   // Solo cuando este el boton activo funciona.
   if (!isEmpty(filterElements)) { 
     const valueFoud = get(filterElements[0], searchKey).toString().toLowerCase() || '';
@@ -18,6 +20,9 @@ const OptionProcess = props => {
   if (isEmpty(filterElements) && !isEmpty(search) && !showNoResults && !isEmpty(data)) { 
     return <ShowInfoComponent textEmpty={textEmpty} {...props} />;
   }
+  // if (!onInput.showOptions) { 
+  //   return [];
+  // }
   if (showNoResults) {
     return [];
   }

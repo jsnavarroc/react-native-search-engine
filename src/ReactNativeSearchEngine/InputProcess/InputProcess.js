@@ -73,6 +73,10 @@ const InputText = ({ propertiesInput }) => {
     buttonEnabled,
     leftIcon,
     error,
+    onBlur,
+    onFocus,
+    setOnInput,
+    onInput,
   } = propertiesInput;
   const { setShowAllButton } = propertiesButton;
   const isCustomize = typeof customizeComponentInput?.InputCutom === 'function';
@@ -101,6 +105,29 @@ const InputText = ({ propertiesInput }) => {
           { ...Styles.containerInput({ showElement, error }), ...containerInputStyle },
         ]}
         autoCompleteType={'off'}
+        onBlur={(e) => { 
+          setShowAllButton(false)
+          setOnInput({...onInput, showOptions:false})
+          onBlur && onBlur({
+            ...e,
+            isArrayObject,
+            searchKey,
+            data,
+            onChangeSearch,
+            showAllMode,
+          });
+        }}
+        onFocus={() => {
+          setOnInput({ ...onInput, showOptions: true })
+          onFocus && onFocus({
+            ...e,
+            isArrayObject,
+            searchKey,
+            data,
+            onChangeSearch,
+            showAllMode,
+          });
+        }}
         onChangeText={text => {
           setSearch(text);
           setShowAllButton(showAllMode && text === '' ? true : false);
