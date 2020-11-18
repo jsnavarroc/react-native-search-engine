@@ -10,7 +10,7 @@ const OptionProcess = props => {
   const { searchKey, filterElements, isArrayObject, search, showNoResults, textEmpty, data, onInput} = props;
   // Solo cuando este el boton activo funciona.
   if (!isEmpty(filterElements)) { 
-    const valueFoud = get(filterElements[0], searchKey).toString().toLowerCase() || '';
+    const valueFoud = get(filterElements[0], searchKey)?.toString().toLowerCase() || '';
     const ifFoundExactItem =  isEqual(search.toLowerCase(), valueFoud)
     const elemetFount = filterElements.length === 1 && ifFoundExactItem
     if (elemetFount) { 

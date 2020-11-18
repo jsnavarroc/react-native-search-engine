@@ -96,9 +96,12 @@ const SearchEngine = props => {
   const scrollStyles = { ...Styles.containerScroll, ...containerScrollStyle };
 
   useEffect(() => {
-    setSearch(value);
     setValueData('');
   }, [data]);
+
+  useEffect(() => {
+    !isEmpty(value) && setSearch(value);
+  }, []);
 
   useEffect(() => {
     // Pendiente: colocar que no mande la data de una si no que la mande cuando complete el input (Pensar primero)
